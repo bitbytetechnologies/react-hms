@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import Navbar from './Components/Common/Navbar';
+import Sidebar from './Components/Common/Sidebar';
+
+import Login from './Components/Login';
+import Home from './Components/Home';
+import User from './Components/Management/User';
+import UsersList from './Components/Management/UsersList';
+import MedicationReport from './Components/Management/MedicationReport';
+
+
+import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+
+          {!localStorage.getItem('user') ? <Route exact path="/"><Login /></Route>
+            :
+            <div>
+              <Navbar></Navbar>
+
+              <Sidebar></Sidebar>
+
+
+              <Route exact path="/"><Home /></Route>
+
+              <Route exact path="/create-user"><User /></Route>
+
+              <Route exact path="/users-list"><UsersList /></Route>
+
+              <Route exact path="/medication-report"><MedicationReport /></Route>
+
+
+            </div>
+
+          }
+        </Switch>
+      </Router>
     </div>
+
   );
 }
 
