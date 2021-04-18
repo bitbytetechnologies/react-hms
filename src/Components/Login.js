@@ -1,10 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { API_URL } from '../Constant';
 
 function Login() {
 
-    const userLogin = () => {
-        localStorage.setItem('user', true)
-        window.location.reload()
+    const [user, setUser] = useState({ username: '', password: '' })
+    const [alert, setAlert] = useState({ display: false, type: '', message: '' })
+    const [wait, setWait] = useState(false)
+
+
+    const handleChange = (name, value) => {
+
+        let u = { ...user }
+        u[name] = value
+        setUser(u)
+
+    }
+
+    const userLogin = async () => {
+
+        setWait(true)
+
+        try {
+
+            const URL = `${API_URL}/api/auth`
+            let resp = await fetch(URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            })
+            resp = await resp.json()
+
+            setAlert({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
+            
+            console.log('11111111111',resp)
+       //     localStorage.setItem('user', true)
+
+        } catch (e) {
+            console.error(e.message)
+        }
+
+        //localStorage.setItem('user', true)
+        //window.location.reload()
+        setWait(false)
     }
 
     return (
@@ -18,21 +55,24 @@ function Login() {
                                     <h4 className="card-title text-center" style={{ fontSize: '3rem' }}> <img width="100" src="/theme-assets/images/logo/logo-2.png" /> Login</h4>
                                 </div>
                                 <div className="card-block">
+                                    {alert.display && <div class={`col-11 m-auto alert alert-${alert.class} mb-2`} role="alert">
+                                        <strong> {alert.type}! </strong> {alert.message}
+                                    </div>}
                                     <div className="card-body w-75 m-auto">
 
-                                        <h5 className="mt-2">Email</h5>
+                                        <h5 className="mt-2">Username</h5>
                                         <fieldset className="form-group">
-                                            <input type="text" className="form-control" />
+                                            <input type="text" className="form-control" value={user.username} onChange={e => handleChange('username', e.target.value)} />
                                         </fieldset>
 
                                         <h5 className="mt-2">Password</h5>
                                         <fieldset className="form-group">
-                                            <input type="text" className="form-control" />
+                                            <input type="text" className="form-control" value={user.password} onChange={e => handleChange('password', e.target.value)} />
                                         </fieldset>
 
 
                                         <div className="form-group mt-5 mb-5">
-                                            <button type="button" className="btn mb-1 btn-primary btn-lg btn-block" onClick={userLogin}>Submit</button>
+                                            <button  type="button" className="btn mb-1 btn-primary btn-lg btn-block" disabled={wait} onClick={userLogin}>{wait ? 'Loading ...' : 'Submit'}</button>
                                         </div>
 
                                     </div>

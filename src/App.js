@@ -7,8 +7,9 @@ import Login from './Components/Login';
 import Home from './Components/Home';
 import User from './Components/Management/User';
 import UsersList from './Components/Management/UsersList';
+import ManageStaff from './Components/Management/ManageStaff';
 import MedicationReport from './Components/Management/MedicationReport';
-
+import SendLocation from './Components/Client/SendLocation';
 
 import './App.css'
 
@@ -28,11 +29,17 @@ function App() {
 
               <Route exact path="/"><Home /></Route>
 
-              <Route exact path="/create-user"><User /></Route>
+              <Route exact path="/user"><User /></Route>
+
+              <Route exact path="/user/:id"><User /></Route>
 
               <Route exact path="/users-list"><UsersList /></Route>
 
+              <Route exact path="/manage-staff"><ManageStaff /></Route>
+
               <Route exact path="/medication-report"><MedicationReport /></Route>
+
+              <Route exact path="/send-location"><SendLocation /></Route>
 
 
             </div>

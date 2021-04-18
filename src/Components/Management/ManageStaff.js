@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { API_URL } from '../../Constant';
 
 
-function UsersList() {
+function ManageStaff() {
 
 
     const [users, setUsers] = useState([])
@@ -118,4 +118,4 @@ function UsersList() {
     )
 }
 
-export default UsersList;
+export default ManageStaff;
