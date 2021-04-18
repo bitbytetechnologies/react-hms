@@ -7,7 +7,7 @@ function User() {
     const { id } = useParams();
 
     const [roles, setRoles] = useState([])
-    const [user, setUser] = useState({ role_id: 0, username: '', email: '', password: '', is_active: true })
+    const [user, setUser] = useState({ id: 0, role_id: 0, username: '', email: '', password: '', is_active: true })
     const [alert, setAlert] = useState({ display: false, type: '', message: '' })
     const [wait, setWait] = useState(false)
 
@@ -30,7 +30,7 @@ function User() {
 
             const URL = `${API_URL}/api/users`
             let resp = await fetch(URL, {
-                method: 'POST',
+                method: id ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
             })
@@ -67,8 +67,33 @@ function User() {
             console.error(e.message)
         }
 
+        if (id) {
+            getUser()
+        }
+
     }
 
+    const getUser = async () => {
+
+        try {
+
+            const URL = `${API_URL}/api/users/${id}`
+            let resp = await fetch(URL)
+            resp = await resp.json()
+
+            if (resp.code === 1) {
+
+                const result = resp.result[0]
+                setUser({ id: result.id, username: result.username, email: result.email })
+
+            }
+
+        } catch (e) {
+            console.error(e.message)
+        }
+
+
+    }
 
     useEffect(() => {
 

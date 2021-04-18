@@ -3,7 +3,7 @@ import { API_URL } from '../Constant';
 
 function Login() {
 
-    const [user, setUser] = useState({ username: '', password: '' })
+    const [user, setUser] = useState({ email: '', password: '' })
     const [alert, setAlert] = useState({ display: false, type: '', message: '' })
     const [wait, setWait] = useState(false)
 
@@ -13,6 +13,7 @@ function Login() {
         let u = { ...user }
         u[name] = value
         setUser(u)
+        console.log(u)
 
     }
 
@@ -30,17 +31,23 @@ function Login() {
             })
             resp = await resp.json()
 
+            console.log('11111111111', resp)
+
+            if (resp.code === 1) {
+                localStorage.setItem('user', JSON.stringify(resp.result))
+                window.location.reload()
+            }
+
             setAlert({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
-            
-            console.log('11111111111',resp)
-       //     localStorage.setItem('user', true)
+
 
         } catch (e) {
+
             console.error(e.message)
+            setAlert({ display: true, class: 'danger', type: "Failed", message: e.message })
+
         }
 
-        //localStorage.setItem('user', true)
-        //window.location.reload()
         setWait(false)
     }
 
@@ -60,19 +67,19 @@ function Login() {
                                     </div>}
                                     <div className="card-body w-75 m-auto">
 
-                                        <h5 className="mt-2">Username</h5>
+                                        <h5 className="mt-2">Email</h5>
                                         <fieldset className="form-group">
-                                            <input type="text" className="form-control" value={user.username} onChange={e => handleChange('username', e.target.value)} />
+                                            <input type="text" className="form-control" value={user.email} onChange={e => handleChange('email', e.target.value)} />
                                         </fieldset>
 
                                         <h5 className="mt-2">Password</h5>
                                         <fieldset className="form-group">
-                                            <input type="text" className="form-control" value={user.password} onChange={e => handleChange('password', e.target.value)} />
+                                            <input type="password" className="form-control" value={user.password} onChange={e => handleChange('password', e.target.value)} />
                                         </fieldset>
 
 
                                         <div className="form-group mt-5 mb-5">
-                                            <button  type="button" className="btn mb-1 btn-primary btn-lg btn-block" disabled={wait} onClick={userLogin}>{wait ? 'Loading ...' : 'Submit'}</button>
+                                            <button type="button" className="btn mb-1 btn-primary btn-lg btn-block" disabled={wait} onClick={userLogin}>{wait ? 'Loading ...' : 'Submit'}</button>
                                         </div>
 
                                     </div>

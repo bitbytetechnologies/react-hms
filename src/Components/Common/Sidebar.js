@@ -19,7 +19,7 @@ function Sidebar() {
                 <ul className="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                     <li className={`nav-item ${window.location.pathname === '/user' ? 'active' : ''}`}><Link to="/user"><i className="ft-user"></i><span className="menu-title" data-i18n="">User</span></Link>
                     </li>
-                    <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n="">Existing Users</span></Link>
+                    <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n="">Users List</span></Link>
                     </li>
                     <li className={`nav-item ${window.location.pathname === '/manage-staff' ? 'active' : ''}`}><Link to="/manage-staff"><i className="ft-users"></i><span className="menu-title" data-i18n="">Manage Staff</span></Link>
                     </li>
