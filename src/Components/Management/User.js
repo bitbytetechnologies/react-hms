@@ -127,16 +127,16 @@ function User() {
                 <div className="content-body">
                     <section className="basic-inputs">
                         <div className="row match-height justify-content-center">
-                            <div className="col-xl-6 col-lg-6 col-md-12">
+                            <div className="col-xl-12 col-lg-12 col-md-12">
                                 <div className="card">
                                     <div className="card-header">
                                         <h4 className="card-title">User Information</h4>
                                     </div>
                                     <div className="card-block">
-                                        {alert.display && <div class={`col-11 m-auto alert alert-${alert.class} mb-2`} role="alert">
+                                        {alert.display && <div class={`col-6 m-auto alert alert-${alert.class} mb-2`} role="alert">
                                             <strong> {alert.type}! </strong> {alert.message}
                                         </div>}
-                                        <div className="card-body w-75 m-auto">
+                                        <div className="card-body col-md-5 col-xs-12 m-auto">
 
                                             <h5 className="mt-2">User Type</h5>
                                             <fieldset className="form-group">
@@ -173,7 +173,7 @@ function User() {
                                                 <label for="is-active" style={{ paddingLeft: '10px' }}> Mark User Active </label>
                                             </fieldset> */}
 
-                                            <div className="form-group">
+                                            <div className="form-group mt-5 mb-5">
                                                 <button type="button" disabled={wait} className="btn mb-1 btn-primary btn-lg btn-block" onClick={submitUser}>Submit</button>
                                             </div>
 

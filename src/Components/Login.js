@@ -34,8 +34,10 @@ function Login() {
             console.log('11111111111', resp)
 
             if (resp.code === 1) {
-                localStorage.setItem('user', JSON.stringify(resp.result))
+
+                localStorage.setItem('user', JSON.stringify(resp))
                 window.location.reload()
+
             }
 
             setAlert({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })

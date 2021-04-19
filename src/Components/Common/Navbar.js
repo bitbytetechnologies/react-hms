@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Navbar() {
+
+    const [user, setUser] = useState(null)
+
 
     const userLogout = () => {
         localStorage.clear()
         window.location.href = '/'
     }
 
+    useEffect(() => {
+
+        let u = localStorage.getItem('user')
+        if (u) {
+            u = JSON.parse(u)
+            setUser(u)
+        }
+
+        return () => { };
+    }, []);
+
     return (
-        <div>
+        user && <div>
             <nav className="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
                 <div className="navbar-wrapper">
                     <div className="navbar-container content">
@@ -28,9 +42,9 @@ function Navbar() {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="dropdown dropdown-user nav-item"><a className="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span className="avatar avatar-online"><img src="theme-assets/images/portrait/small/avatar-s-19.png" alt="avatar" /><i></i></span></a>
+                                <li className="dropdown dropdown-user nav-item"><a className="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown" style={{ marginTop: '7px' }}>             <span className="avatar avatar-online"><img src="/user.jpg" alt="avatar" /><i></i></span></a>
                                     <div className="dropdown-menu dropdown-menu-right">
-                                        <div className="arrow_box_right"><a className="dropdown-item" href="#"><span className="avatar avatar-online"><img src="theme-assets/images/portrait/small/avatar-s-19.png" alt="avatar" /><span className="user-name text-bold-700 ml-1">John Doe</span></span></a>
+                                        <div className="arrow_box_right"><a className="dropdown-item" href="#"><span className="avatar avatar-online"><img src="/user.jpg" alt="avatar" /><span className="user-name text-bold-700 ml-1">{user.result.username}</span></span></a>
                                             <div className="dropdown-divider"></div>
                                             <a className="dropdown-item" href="#"><i className="ft-user"></i> Edit Profile</a>
                                             <div className="dropdown-divider"></div>
