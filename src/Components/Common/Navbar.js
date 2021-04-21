@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+
 
 function Navbar() {
 
@@ -33,12 +35,18 @@ function Navbar() {
                                 </li>
                             </ul>
                             <ul className="nav navbar-nav float-right">
-                                <li className="dropdown dropdown-notification nav-item"><a className="nav-link nav-link-label" href="#" data-toggle="dropdown"><i className="ficon ft-mail">             </i></a>
+                                <li className="dropdown dropdown-notification nav-item"><a className="nav-link nav-link-label"  data-toggle="dropdown"><i className="ficon ft-mail"></i> </a>
                                     <div className="dropdown-menu dropdown-menu-right">
-                                        <div className="arrow_box_right">
-                                            <a className="dropdown-item" href="#"><i className="ft-book"></i> Read Mail</a>
+                                        {/* <div className="arrow_box_right">
+                                            <a className="dropdown-item" href="#"><i className="ft-book"></i> Read Mail  </a>
                                             <a className="dropdown-item" href="#"><i className="ft-bookmark"></i> Read Later</a>
                                             <a className="dropdown-item" href="#"><i className="ft-check-square"></i> Mark all Read</a>
+                                        </div> */}
+                                        <div className="arrow_box left">
+                                            <div className="dropdown-item">
+                                                Location Request &nbsp;
+                                                <Link to="/notifications"><button className="btn btn-primary" style={{ width: '65px', height: '30px', padding: '0' }}>Show  </button></Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -63,4 +71,4 @@ function Navbar() {
 }
 
 
-export default Navbar;
+export default withRouter(Navbar);

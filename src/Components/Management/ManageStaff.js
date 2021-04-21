@@ -42,7 +42,7 @@ function ManageStaff() {
                 <div className="content-wrapper-before"></div>
                 <div className="content-header row">
                     <div className="content-header-left col-md-4 col-12 mb-2">
-                        <h3 className="content-header-title">Users</h3>
+                        <h3 className="content-header-title">Staff Members</h3>
                     </div>
                     <div className="content-header-right col-md-8 col-12">
                         <div className="breadcrumbs-top float-md-right">
@@ -51,7 +51,7 @@ function ManageStaff() {
                                     <li className="breadcrumb-item">
                                         <a href="index.html">Home</a>
                                     </li>
-                                    <li className="breadcrumb-item active">Existing Users
+                                    <li className="breadcrumb-item active">Staff Members
                                     </li>
                                 </ol>
                             </div>
@@ -63,7 +63,7 @@ function ManageStaff() {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title">Existing Users</h4>
+                                    <h4 className="card-title">Staff Members</h4>
                                     <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                     <div className="heading-elements">
                                         <ul className="list-inline mb-0">

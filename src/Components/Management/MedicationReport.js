@@ -43,22 +43,31 @@ function MedicationReport() {
                                     <div className="card-content collapse show">
                                         <div className="card-body">
                                             <div className="col-sm-12 col-md-5 m-auto">
-                                                <PieChart
-                                                    data={[
-                                                        { title: 'Morning', value: 20, color: '#E38627' },
-                                                        { title: 'Afternoon', value: 50, color: '#C13C37' },
-                                                        { title: 'Evening', value: 30, color: '#6A2135' },
-                                                    ]}
-                                                    totalValue={100}
-                                                    lineWidth={100}
-                                                    label={({ dataEntry }) => dataEntry.value + '%'}
-                                                    labelStyle={{
-                                                        fontSize: '5px',
-                                                        fontFamily: 'sans-serif',
-                                                        fill: 'white',
-                                                    }}
+                                                <div className="row mb-3">
+                                                    <div className="m-auto">
+                                                        <span style={{ backgroundColor: '#E38627', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Morning </span>
+                                                        <span style={{ backgroundColor: '#C13C37', color: 'white', marginLeft: '5px', fontWeight: 'bold'  }}> Afternoon </span>
+                                                        <span style={{ backgroundColor: '#6A2135', color: 'white', marginLeft: '5px', fontWeight: 'bold'  }}> Evening </span>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <PieChart
+                                                        data={[
+                                                            { title: 'Morning', value: 20, color: '#E38627' },
+                                                            { title: 'Afternoon', value: 50, color: '#C13C37' },
+                                                            { title: 'Evening', value: 30, color: '#6A2135' },
+                                                        ]}
+                                                        totalValue={100}
+                                                        lineWidth={100}
+                                                        label={({ dataEntry }) => dataEntry.value + '%'}
+                                                        labelStyle={{
+                                                            fontSize: '5px',
+                                                            fontFamily: 'sans-serif',
+                                                            fill: 'white',
+                                                        }}
 
-                                                />
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

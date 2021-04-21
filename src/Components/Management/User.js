@@ -138,7 +138,7 @@ function User() {
                                         </div>}
                                         <div className="card-body col-md-5 col-xs-12 m-auto">
 
-                                            <h5 className="mt-2">User Type</h5>
+                                            <h5 className="mt-2">Role</h5>
                                             <fieldset className="form-group">
                                                 <select className="form-control" id="basicSelect" onChange={(e) => handleChange('role_id', e.target.value)}>
                                                     <option value={user.role_id}> Please select ...</option>
