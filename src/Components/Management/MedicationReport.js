@@ -30,6 +30,8 @@ function MedicationReport() {
                                 <div className="card">
                                     <div className="card-header">
                                         <h4 className="card-title">Graphical Representation</h4>
+                                        <br />
+                                        <p>This monthly medication report presenting percetage of client who took medciation facilities during their stay at hotel.</p>
                                         <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                         <div className="heading-elements">
                                             <ul className="list-inline mb-0">
@@ -46,8 +48,8 @@ function MedicationReport() {
                                                 <div className="row mb-3">
                                                     <div className="m-auto">
                                                         <span style={{ backgroundColor: '#E38627', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Morning </span>
-                                                        <span style={{ backgroundColor: '#C13C37', color: 'white', marginLeft: '5px', fontWeight: 'bold'  }}> Afternoon </span>
-                                                        <span style={{ backgroundColor: '#6A2135', color: 'white', marginLeft: '5px', fontWeight: 'bold'  }}> Evening </span>
+                                                        <span style={{ backgroundColor: '#C13C37', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Afternoon </span>
+                                                        <span style={{ backgroundColor: '#6A2135', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Evening </span>
                                                     </div>
                                                 </div>
                                                 <div className="row">

@@ -38,9 +38,11 @@ function User() {
 
             setAlert({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
 
-            setTimeout(() => {
-                window.location.href = '/users-list'
-            }, 2000)
+            if(resp.code === 1) {
+                setTimeout(() => {
+                    window.location.href = '/users-list'
+                }, 2000)
+            }
 
         } catch (e) {
 

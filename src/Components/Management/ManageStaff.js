@@ -19,7 +19,11 @@ function ManageStaff() {
             let resp = await fetch(URL)
             resp = await resp.json()
 
-            setUsers(resp.result)
+            let staff = []
+            if(resp.code === 1) {
+                staff = resp.result.filter(s => s.rolename === "Staff")
+            }
+            setUsers(staff)
 
         } catch (e) {
             console.error(e.message)
