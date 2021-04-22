@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 
-function Navbar() {
+function Navbar(props) {
 
-    const [user, setUser] = useState(null)
 
 
     const userLogout = () => {
@@ -12,19 +11,8 @@ function Navbar() {
         window.location.href = '/'
     }
 
-    useEffect(() => {
-
-        let u = localStorage.getItem('user')
-        if (u) {
-            u = JSON.parse(u)
-            setUser(u)
-        }
-
-        return () => { };
-    }, []);
-
     return (
-        user && <div>
+        props.user && <div>
             <nav className="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
                 <div className="navbar-wrapper">
                     <div className="navbar-container content">
@@ -47,7 +35,7 @@ function Navbar() {
                                 </li>
                                 <li className="dropdown dropdown-user nav-item"><a className="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown" style={{ marginTop: '7px' }}>             <span className="avatar avatar-online"><img src="/user.jpg" alt="avatar" /><i></i></span></a>
                                     <div className="dropdown-menu dropdown-menu-right">
-                                        <div className="arrow_box_right"><a className="dropdown-item" href="#"><span className="avatar avatar-online"><img src="/user.jpg" alt="avatar" /><span className="user-name text-bold-700 ml-1">{user.result.username}</span></span></a>
+                                        <div className="arrow_box_right"><a className="dropdown-item" href="#"><span className="avatar avatar-online"><img src="/user.jpg" alt="avatar" /><span className="user-name text-bold-700 ml-1">{props.user.result.username}</span></span></a>
                                             {/* <div className="dropdown-divider"></div> */}
                                             {/* <a className="dropdown-item" href="#"><i className="ft-user"></i> Edit Profile</a> */}
                                             <div className="dropdown-divider"></div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 function Sidebar() {
     return (
@@ -32,4 +32,4 @@ function Sidebar() {
     )
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

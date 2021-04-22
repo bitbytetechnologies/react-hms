@@ -13,16 +13,32 @@ import SendLocation from './Components/Client/SendLocation';
 import Notifications from './Components/Common/Notifictaions';
 
 import './App.css'
+import { useEffect, useState } from "react";
 
 function App() {
+
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+
+    let u = localStorage.getItem('user')
+
+    if (u) {
+      setUser(JSON.parse(u))
+    }
+
+    return () => { };
+
+  }, []);
+
   return (
     <div className="App">
       <Router>
 
-        {!localStorage.getItem('user') ? <Route exact path="/"><Login /></Route>
+        {!user ? <Route exact path="/"><Login /></Route>
           :
           <div>
-            <Navbar></Navbar>
+            <Navbar user={user}></Navbar>
 
             <Sidebar></Sidebar>
 
