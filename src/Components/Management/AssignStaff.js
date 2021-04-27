@@ -4,7 +4,7 @@ import { API_URL, STAFF_OBJECT,  } from '../../Constant';
 import { getFormattedDate } from '../../Helpers';
 
 
-function ManageStaff() {
+function AssignStaff() {
 
 
     const [roster, setRoster] = useState(STAFF_OBJECT)
@@ -33,16 +33,17 @@ function ManageStaff() {
                 <div className="content-wrapper-before"></div>
                 <div className="content-header row">
                     <div className="content-header-left col-md-4 col-12 mb-2">
-                        <h3 className="content-header-title">Manage Staff</h3>
+                        <h3 className="content-header-title">Assign Staff</h3>
                     </div>
                     <div className="content-header-right col-md-8 col-12">
                         <div className="breadcrumbs-top float-md-right">
                             <div className="breadcrumb-wrapper mr-1">
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item">
-                                        <a href="index.html">Home</a>
+                                        <Link to="/">Home</Link>
                                     </li>
-                                    <li className="breadcrumb-item active">Manage Staff</li>
+                                    <li className="breadcrumb-item active"> <Link to="/notifications"> Notifications </Link> </li>
+                                    <li className="breadcrumb-item active">Assign Staff</li>
                                 </ol>
                             </div>
                         </div>
@@ -145,4 +146,4 @@ function ManageStaff() {
     )
 }
 
-export default ManageStaff;
+export default AssignStaff;

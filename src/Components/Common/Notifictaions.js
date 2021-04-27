@@ -81,9 +81,9 @@ function Notifications(props) {
                             <div className="breadcrumb-wrapper mr-1">
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item">
-                                        <a href="index.html">Home</a>
+                                        <Link to="/">Home</Link>
                                     </li>
-                                    <li className="breadcrumb-item active"> Requests Notification</li>
+                                    <li className="breadcrumb-item active"> <Link to="/notifications"> Notifications </Link> </li>
                                 </ol>
                             </div>
                         </div>
@@ -146,12 +146,12 @@ function Notifications(props) {
                                                                     }
                                                                     {n.approved === 1 &&
                                                                         <div className="row">
-                                                                            <span class="badge badge-pill badge-success"> Accepted </span>
+                                                                            <Link to={`/assign-staff?req=${n.ref_id}`}> <span style={{ fontSize: '1.2rem' }} class="badge badge-pill badge-success"> Assign Staff &#8594; </span></Link>
                                                                         </div>
                                                                     }
                                                                     {n.approved === 2 &&
                                                                         <div className="row">
-                                                                            <span class="badge badge-pill badge-danger"> Rejected </span>
+                                                                            <span style={{ fontSize: '1.2rem' }} class="badge badge-pill badge-danger"> Rejected </span>
                                                                         </div>
                                                                     }
 

@@ -32,8 +32,9 @@ export const USER_OBJECT = {
     "pg_doctor_address": "pd_doctor_address"
 }
 
-const date =  new Date()
-const time = date.toISOString().substring(11,16);
+const date = new Date()
+const time = date.toISOString().substring(11, 16);
+
 export const STAFF_OBJECT = {
     staff_id: 0,
     hours: "0",

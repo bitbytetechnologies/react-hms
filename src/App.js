@@ -7,7 +7,7 @@ import Login from './Components/Login';
 import Home from './Components/Home';
 import User from './Components/Management/User';
 import UsersList from './Components/Management/UsersList';
-import ManageStaff from './Components/Management/ManageStaff';
+import AssignStaff from './Components/Management/AssignStaff';
 import MedicationReport from './Components/Management/MedicationReport';
 import SearchLocation from './Components/Client/SearchLocation';
 import Notifications from './Components/Common/Notifictaions';
@@ -55,7 +55,7 @@ function App() {
 
             <Route exact path="/users-list"> <UsersList user={user} /> </Route>
 
-            <Route exact path="/manage-staff"> <ManageStaff user={user} /> </Route>
+            <Route exact path="/assign-staff"> <AssignStaff user={user} /> </Route>
 
             <Route exact path="/medication-report"> <MedicationReport user={user} /> </Route>
 
