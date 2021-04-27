@@ -1,52 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { API_URL } from '../../Constant';
+import { API_URL, STAFF_OBJECT,  } from '../../Constant';
+import { getFormattedDate } from '../../Helpers';
 
 
 function ManageStaff() {
 
 
-    const [users, setUsers] = useState([])
-    const [wait, setWait] = useState(false)
+    const [roster, setRoster] = useState(STAFF_OBJECT)
 
-    const getUsersList = async () => {
 
-        setWait(true)
+    const handleChange = (name, value) => {
 
-        try {
+        let r = { ...roster }
+        r[name] = value
+        setRoster(r)
+    }
 
-            const URL = `${API_URL}/api/users`
-            let resp = await fetch(URL)
-            resp = await resp.json()
+    const submitRoster = () => {
 
-            let staff = []
-            if(resp.code === 1) {
-                staff = resp.result.filter(s => s.rolename === "Staff")
-            }
-            setUsers(staff)
-
-        } catch (e) {
-            console.error(e.message)
-        }
-
-        setWait(false)
     }
 
     useEffect(() => {
-
-        getUsersList()
 
         return () => {
         };
     }, []);
 
     return (
-        users && <div className="app-content content">
+        <div className="app-content content">
             <div className="content-wrapper">
                 <div className="content-wrapper-before"></div>
                 <div className="content-header row">
                     <div className="content-header-left col-md-4 col-12 mb-2">
-                        <h3 className="content-header-title">Staff Members</h3>
+                        <h3 className="content-header-title">Manage Staff</h3>
                     </div>
                     <div className="content-header-right col-md-8 col-12">
                         <div className="breadcrumbs-top float-md-right">
@@ -55,8 +42,7 @@ function ManageStaff() {
                                     <li className="breadcrumb-item">
                                         <a href="index.html">Home</a>
                                     </li>
-                                    <li className="breadcrumb-item active">Staff Members
-                                    </li>
+                                    <li className="breadcrumb-item active">Manage Staff</li>
                                 </ol>
                             </div>
                         </div>
@@ -66,52 +52,89 @@ function ManageStaff() {
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
-                                <div className="card-header">
-                                    <h4 className="card-title">Staff Members</h4>
-                                    <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
-                                    <div className="heading-elements">
-                                        <ul className="list-inline mb-0">
-                                            <li><a data-action="collapse"><i className="ft-minus"></i></a></li>
-                                            <li><a data-action="expand"><i className="ft-maximize"></i></a></li>
-                                            <li><a data-action="close"><i className="ft-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                                 <div className="card-content collapse show">
 
-                                    <div className="table-responsive">
-                                        <table className="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Role</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col"> Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    users.map(u => {
-                                                        return (
-                                                            <tr>
-                                                                <th scope="row"> {u.id} </th>
-                                                                <td> {u.rolename}</td>
-                                                                <td> {u.username} </td>
-                                                                <td> {u.email} </td>
-                                                                <td data-toggle="tooltip" data-placement="right" title={`Edit ${u.username}`}>
-                                                                    <Link to={`/user/${u.id}`}>
-                                                                        <i className="ft-edit"></i>
-                                                                    </Link>
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    })
-                                                }
+                                    <section className="basic-inputs">
+                                        <div className="row match-height justify-content-center">
+                                            <div className="col-xl-12 col-lg-12 col-md-12">
+                                                <div className="card">
+                                                    <div className="card-header">
+                                                        <h4 className="card-title">Staff Roster</h4>
+                                                    </div>
+                                                    <div className="card-block">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                        <div className="card-body col-md-12 col-xs-12 m-auto">
+
+                                                            <div className="row justify-content-center">
+
+                                                                <div className="col-12 col-md-5 p-2">
+
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">Staff Member</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <select className="form-control" id="basicSelect" onChange={(e) => handleChange('staff_id', e.target.value)}>
+                                                                                <option value=""> Please select ...</option>
+                                                                                <option value={1}> Tariq</option>
+                                                                                <option value={2}> Zohaib</option>
+
+
+                                                                            </select>
+                                                                        </fieldset>
+                                                                    </Fragment>
+
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">From Date</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <input type="date" className="form-control" value={roster.from_date} onChange={e => handleChange('from_date', e.target.value)} />
+                                                                        </fieldset>
+                                                                    </Fragment>
+
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">From Time</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <input type="time" className="form-control" value={roster.from_time} onChange={e => handleChange('from_time', e.target.value)} />
+                                                                        </fieldset>
+                                                                    </Fragment>
+
+                                                                </div>
+
+                                                                <div className="col-12 col-md-5 p-2">
+
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">Shift Hours</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <input type="text" className="form-control" value={roster.hours} onChange={e => handleChange('hours', e.target.value)} />
+                                                                        </fieldset>
+                                                                    </Fragment>
+
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">To Date</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <input type="date" className="form-control" value={roster.to_date} onChange={e => handleChange('to_date', e.target.value)} />
+                                                                        </fieldset>
+                                                                    </Fragment>
+
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">To Time</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <input type="time" className="form-control" value={roster.to_time} onChange={e => handleChange('to_time', e.target.value)} />
+                                                                        </fieldset>
+                                                                    </Fragment>
+
+                                                                </div>
+                                                                <div className="form-group col-md-6 m-auto">
+                                                                    <button type="button" className="btn mb-1 btn-primary btn-lg btn-block mt-5 mb-5" onClick={() => submitRoster()}>Submit</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
                                 </div>
                             </div>
                         </div>

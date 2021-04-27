@@ -47,21 +47,21 @@ function App() {
 
             <Sidebar user={user} />
 
-            <Route exact path="/"> <Home /> </Route>
+            <Route exact path="/"> <Home user={user} /> </Route>
 
-            <Route exact path="/user"> <User /> </Route>
+            <Route exact path="/user"> <User user={user} /> </Route>
 
-            <Route exact path="/update-user"> <User /> </Route>
+            <Route exact path="/update-user"> <User user={user} /> </Route>
 
-            <Route exact path="/users-list"> <UsersList /> </Route>
+            <Route exact path="/users-list"> <UsersList user={user} /> </Route>
 
-            <Route exact path="/manage-staff"> <ManageStaff /> </Route>
+            <Route exact path="/manage-staff"> <ManageStaff user={user} /> </Route>
 
-            <Route exact path="/medication-report"> <MedicationReport /> </Route>
+            <Route exact path="/medication-report"> <MedicationReport user={user} /> </Route>
 
-            <Route exact path="/search-location"> <SearchLocation /> </Route>
+            <Route exact path="/search-location"> <SearchLocation user={user} /> </Route>
 
-            <Route exact path="/notifications"> <Notifications /> </Route>
+            <Route exact path="/notifications"> <Notifications user={user} /> </Route>
           </div>
 
         }

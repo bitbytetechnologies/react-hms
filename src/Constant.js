@@ -1,8 +1,10 @@
+import { setFormattedDate } from "./Helpers";
+
 //export const API_URL = 'https://node-server-travel.herokuapp.com'
 export const API_URL = 'http://localhost:3200'
 
 export const USER_OBJECT = {
-    "id" : 0,
+    "id": 0,
     "username": "guest1",
     "password": "8591",
     "email": "guest1@g.com",
@@ -28,4 +30,15 @@ export const USER_OBJECT = {
     "pg_doctor": "pg_doctor",
     "pg_doctor_contact_no": "pg_doctor_contact_no",
     "pg_doctor_address": "pd_doctor_address"
+}
+
+const date =  new Date()
+const time = date.toISOString().substring(11,16);
+export const STAFF_OBJECT = {
+    staff_id: 0,
+    hours: "0",
+    from_date: setFormattedDate(new Date()),
+    to_date: setFormattedDate(new Date()),
+    from_time: time,
+    to_time: time
 }

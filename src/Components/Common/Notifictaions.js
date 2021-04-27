@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { API_URL } from '../../Constant';
 import parse from 'html-react-parser';
 
-function Notifications() {
+function Notifications(props) {
 
 
     const [notifications, setNotifications] = useState([])
@@ -22,6 +22,38 @@ function Notifications() {
 
                 setNotifications(resp.result)
             }
+
+        } catch (e) {
+            console.error(e.message)
+        }
+
+    }
+
+
+    const changeNotificatonStatus = async (index, req_id, status) => {
+
+        try {
+
+
+
+            const URL = `${API_URL}/api/notifications/mark_read`
+            let resp = await fetch(URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "req_id": req_id,
+                    "user_id": props.user.id,
+                    "approved": status
+                })
+            })
+            resp = await resp.json()
+
+            if (resp.code === 1) {
+                let n = [...notifications]
+                n[index]['approved'] = status
+                setNotifications(n)
+            }
+
 
         } catch (e) {
             console.error(e.message)
@@ -82,7 +114,16 @@ function Notifications() {
                                                     <th scope="col"> By </th>
                                                     <th scope="col"> Type </th>
                                                     <th scope="col"> Description </th>
-                                                    <th scope="col"> Actions</th>
+                                                    <th scope="col">
+
+                                                        <div>Action / Status</div>
+                                                        {/* <div className="form-check">
+                                                            <input class="form-check-input" onChange={(e)=>filterPending} type="checkbox" value="" id="flexCheckDefault" />
+                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                Filter Pending Requests
+                                                            </label>
+                                                        </div> */}
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -95,12 +136,12 @@ function Notifications() {
                                                                 <td> {n.send_by_user} </td>
                                                                 <td> {n.notification_type} </td>
                                                                 <td>  {parse(n.notification_text)}</td>
-                                                                <td style={{justifyContent: 'center', verticalAlign: 'middle'}}>
+                                                                <td style={{ justifyContent: 'center', verticalAlign: 'middle' }}>
 
                                                                     {n.approved === 0 &&
                                                                         <div className="row">
-                                                                            <button className="btn btn-success" style={{ width: '70px', height: '30px', padding: '0', marginRight: '5px' }}> Accept</button>
-                                                                            <button className="btn btn-danger" style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
+                                                                            <button className="btn btn-success" onClick={(e) => changeNotificatonStatus(index, n.ref_id, 1)} style={{ width: '70px', height: '30px', padding: '0', marginRight: '5px' }}> Accept</button>
+                                                                            <button className="btn btn-danger" onClick={(e) => changeNotificatonStatus(index, n.ref_id, 2)} style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
                                                                         </div>
                                                                     }
                                                                     {n.approved === 1 &&
@@ -113,8 +154,8 @@ function Notifications() {
                                                                             <span class="badge badge-pill badge-danger"> Rejected </span>
                                                                         </div>
                                                                     }
-                                                                    
-                                                                    
+
+
                                                                 </td>
                                                             </tr>
                                                         )
