@@ -9,7 +9,7 @@ import User from './Components/Management/User';
 import UsersList from './Components/Management/UsersList';
 import ManageStaff from './Components/Management/ManageStaff';
 import MedicationReport from './Components/Management/MedicationReport';
-import SendLocation from './Components/Client/SendLocation';
+import SearchLocation from './Components/Client/SearchLocation';
 import Notifications from './Components/Common/Notifictaions';
 
 import './App.css'
@@ -17,14 +17,20 @@ import { useEffect, useState } from "react";
 
 function App() {
 
+
   const [user, setUser] = useState(null)
 
   useEffect(() => {
 
+    //localStorage.setItem('user', JSON.stringify(user))
     let u = localStorage.getItem('user')
 
     if (u) {
-      setUser(JSON.parse(u))
+
+      u = JSON.parse(u)
+      u = u.result
+      setUser(u)
+
     }
 
     return () => { };
@@ -34,32 +40,28 @@ function App() {
   return (
     <div className="App">
       <Router>
-
         {!user ? <Route exact path="/"><Login /></Route>
           :
           <div>
-            <Navbar user={user}></Navbar>
+            <Navbar user={user} />
 
-            <Sidebar></Sidebar>
+            <Sidebar user={user} />
 
+            <Route exact path="/"> <Home /> </Route>
 
-            <Route exact path="/"><Home /></Route>
+            <Route exact path="/user"> <User /> </Route>
 
-            <Route exact path="/user"><User /></Route>
+            <Route exact path="/update-user"> <User /> </Route>
 
-            <Route exact path="/user/:id"><User /></Route>
+            <Route exact path="/users-list"> <UsersList /> </Route>
 
-            <Route exact path="/users-list"><UsersList /></Route>
+            <Route exact path="/manage-staff"> <ManageStaff /> </Route>
 
-            <Route exact path="/manage-staff"><ManageStaff /></Route>
+            <Route exact path="/medication-report"> <MedicationReport /> </Route>
 
-            <Route exact path="/medication-report"><MedicationReport /></Route>
+            <Route exact path="/search-location"> <SearchLocation /> </Route>
 
-            <Route exact path="/send-location"><SendLocation /></Route>
-
-            <Route exact path="/notifications"><Notifications /></Route>
-
-
+            <Route exact path="/notifications"> <Notifications /> </Route>
           </div>
 
         }

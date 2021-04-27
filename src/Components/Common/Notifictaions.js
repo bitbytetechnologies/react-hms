@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../Constant';
-
+import parse from 'html-react-parser';
 
 function Notifications() {
 
@@ -10,10 +10,30 @@ function Notifications() {
     const [wait, setWait] = useState(false)
 
 
+    const getNotifications = async () => {
+
+        try {
+            let u = JSON.parse(localStorage.getItem('user'))
+            const URL = `${API_URL}/api/notifications/my/${u.result.id}`
+            let resp = await fetch(URL)
+            resp = await resp.json()
+
+            if (resp.code === 1) {
+
+                setNotifications(resp.result)
+            }
+
+        } catch (e) {
+            console.error(e.message)
+        }
+
+    }
+
     useEffect(() => {
 
-        return () => { };
+        getNotifications()
 
+        return () => { };
     }, []);
 
     return (
@@ -31,7 +51,7 @@ function Notifications() {
                                     <li className="breadcrumb-item">
                                         <a href="index.html">Home</a>
                                     </li>
-                                    <li className="breadcrumb-item active"> Requests</li>
+                                    <li className="breadcrumb-item active"> Requests Notification</li>
                                 </ol>
                             </div>
                         </div>
@@ -42,7 +62,7 @@ function Notifications() {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title">Client Requests</h4>
+                                    <h4 className="card-title">Requests Notifications <span class="badge badge-pill badge-info">{notifications.length} </span> </h4>
                                     <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                     <div className="heading-elements">
                                         <ul className="list-inline mb-0">
@@ -60,45 +80,47 @@ function Notifications() {
                                                 <tr>
                                                     <th scope="col"> # </th>
                                                     <th scope="col"> By </th>
-                                                    <th scope="col"> Location </th>
+                                                    <th scope="col"> Type </th>
+                                                    <th scope="col"> Description </th>
                                                     <th scope="col"> Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row"> 1 </th>
-                                                    <td> John </td>
-                                                    <td> Sydney Opera House </td>
-                                                    <td>
-                                                        <div className="row">
-                                                            <button className="btn btn-success mb-1" style={{ width: '65px', height: '30px', padding: '0', marginRight: '10px' }}> Accept</button>
-                                                            <button className="btn btn-danger" style={{ width: '65px', height: '30px', padding: '0' }}> Reject</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"> 1 </th>
-                                                    <td> Ramsey </td>
-                                                    <td> Great Barrier Reef Marine Park </td>
-                                                    <td>
-                                                        <div className="row">
-                                                            <button className="btn btn-success mb-1" style={{ width: '65px', height: '30px', padding: '0', marginRight: '10px' }}> Accept</button>
-                                                            <button className="btn btn-danger" style={{ width: '65px', height: '30px', padding: '0' }}> Reject</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"> 1 </th>
-                                                    <td> Sarah </td>
-                                                    <td> Uluru-Kata Tjuta National Park </td>
-                                                    <td>
-                                                        <div className="row">
-                                                            <button className="btn btn-success mb-1" style={{ width: '65px', height: '30px', padding: '0', marginRight: '10px' }}> Accept</button>
-                                                            <button className="btn btn-danger" style={{ width: '65px', height: '30px', padding: '0' }}> Reject</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                
+                                                {
+                                                    notifications.map((n, index) => {
+                                                        return (
+
+                                                            <tr>
+                                                                <th scope="row"> {index + 1} </th>
+                                                                <td> {n.send_by_user} </td>
+                                                                <td> {n.notification_type} </td>
+                                                                <td>  {parse(n.notification_text)}</td>
+                                                                <td style={{justifyContent: 'center', verticalAlign: 'middle'}}>
+
+                                                                    {n.approved === 0 &&
+                                                                        <div className="row">
+                                                                            <button className="btn btn-success" style={{ width: '70px', height: '30px', padding: '0', marginRight: '5px' }}> Accept</button>
+                                                                            <button className="btn btn-danger" style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
+                                                                        </div>
+                                                                    }
+                                                                    {n.approved === 1 &&
+                                                                        <div className="row">
+                                                                            <span class="badge badge-pill badge-success"> Accepted </span>
+                                                                        </div>
+                                                                    }
+                                                                    {n.approved === 2 &&
+                                                                        <div className="row">
+                                                                            <span class="badge badge-pill badge-danger"> Rejected </span>
+                                                                        </div>
+                                                                    }
+                                                                    
+                                                                    
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
                                             </tbody>
                                         </table>
                                     </div>

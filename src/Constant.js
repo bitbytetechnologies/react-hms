@@ -1,4 +1,5 @@
-export const API_URL = 'https://node-server-travel.herokuapp.com'
+//export const API_URL = 'https://node-server-travel.herokuapp.com'
+export const API_URL = 'http://localhost:3200'
 
 export const USER_OBJECT = {
     "id" : 0,

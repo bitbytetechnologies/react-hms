@@ -1,6 +1,6 @@
 
 import Autocomplete from 'react-google-autocomplete';
-function SendLocation() {
+function SearchLocation() {
 
     const onPlaceSelected = (place) => {
         const address = place.formatted_address,
@@ -37,5 +37,5 @@ function SendLocation() {
     )
 }
 
-export default SendLocation;
+export default SearchLocation;
 

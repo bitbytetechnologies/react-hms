@@ -96,7 +96,7 @@ function UsersList() {
                                                                 <td> {u.username} </td>
                                                                 <td> {u.email} </td>
                                                                 <td data-toggle="tooltip" data-placement="right" title={`Edit ${u.username}`}>
-                                                                    <Link to={`/user/${u.id}`}>
+                                                                    <Link to={`/update-user?id=${u.id}`}>
                                                                         <i className="ft-edit"></i>
                                                                     </Link>
                                                                 </td>
