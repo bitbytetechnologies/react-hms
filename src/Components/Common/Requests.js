@@ -91,7 +91,7 @@ function Requests(props) {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title"> Requests List <span className="badge badge-pill badge-info">{requests.length} </span> </h4>
+                                    <h4 className="card-title"> Requests List <span className="badge badge-pill badge-info">{requests ? requests.length : 0} </span> </h4>
                                     <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                     <div className="heading-elements">
                                         <ul className="list-inline mb-0">
@@ -116,7 +116,7 @@ function Requests(props) {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    requests.map((r, index) => {
+                                                    requests && requests.map((r, index) => {
                                                         return (
 
                                                             <tr key={r.id}>

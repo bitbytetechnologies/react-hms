@@ -31,8 +31,6 @@ function Login() {
             })
             resp = await resp.json()
 
-            console.log('11111111111', resp)
-
             if (resp.code === 1) {
 
                 localStorage.setItem('user', JSON.stringify(resp))

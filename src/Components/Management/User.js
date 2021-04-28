@@ -186,7 +186,7 @@ function User() {
                                                     <Fragment>
                                                         <h5 className="mt-2">Password</h5>
                                                         <fieldset className="form-group">
-                                                            <input type="password" className="form-control" value={user.password} onChange={e => handleChange('password', e.target.value)} />
+                                                            <input type="password" disabled={id ? true : false} className="form-control" value={user.password} onChange={e => handleChange('password', e.target.value)} />
                                                         </fieldset>
                                                     </Fragment>
 

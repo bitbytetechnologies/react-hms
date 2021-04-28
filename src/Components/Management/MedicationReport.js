@@ -14,7 +14,7 @@ function MedicationReport() {
                         <div className="breadcrumbs-top float-md-right">
                             <div className="breadcrumb-wrapper mr-1">
                                 <ol className="breadcrumb">
-                                    <li className="breadcrumb-item"><a href="index.html">Home</a>
+                                    <li className="breadcrumb-item"><a href="/">Home</a>
                                     </li>
                                     <li className="breadcrumb-item active">Medication Report
                                     </li>
