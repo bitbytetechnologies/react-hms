@@ -17,15 +17,15 @@ function Sidebar(props) {
             </div>
             <div className="main-menu-content">
                 <ul className="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/notifications' ? 'active' : ''}`}><Link to="/notifications"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n="">Notifications</span></Link>
+                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/requests' ? 'active' : ''}`}><Link to="/requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Client Requestes </span></Link>
                     </li>}
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/user' ? 'active' : ''}`}><Link to="/user"><i className="ft-user"></i><span className="menu-title" data-i18n="">User</span></Link>
+                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/user' ? 'active' : ''}`}><Link to="/user"><i className="ft-user"></i><span className="menu-title" data-i18n=""> Create User </span></Link>
                     </li>}
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n="">Users List</span></Link>
+                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n=""> Users List </span></Link>
                     </li>}
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/medication-report' ? 'active' : ''}`}><Link to="/medication-report"><i className="ft-book"></i><span className="menu-title" data-i18n="">Madication Report</span></Link>
+                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/medication-report' ? 'active' : ''}`}><Link to="/medication-report"><i className="ft-book"></i><span className="menu-title" data-i18n=""> Madication Report </span></Link>
                     </li>}
-                    {props.user.role_id === 3 && <li className={`nav-item ${window.location.pathname === '/search-location' ? 'active' : ''}`}><Link to="/search-location"><i className="ft-search"></i><span className="menu-title" data-i18n="">Search Location</span></Link>
+                    {props.user.role_id === 3 && <li className={`nav-item ${window.location.pathname === '/search-location' ? 'active' : ''}`}><Link to="/search-location"><i className="ft-search"></i><span className="menu-title" data-i18n=""> Search Location </span></Link>
                     </li>}
                 </ul>
             </div>

@@ -126,7 +126,7 @@ function User() {
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item"><Link to="/">Home</Link>
                                     </li>
-                                    <li className="breadcrumb-item active"> {id ? 'Existing Users - Update ' : ''} User
+                                    <li className="breadcrumb-item active"> {id ? 'Users List - Update ' : ''} User
                                     </li>
                                 </ol>
                             </div>
@@ -350,13 +350,6 @@ function User() {
                                                     <button type="button" disabled={wait} className="btn mb-1 btn-primary btn-lg btn-block mt-5 mb-5" onClick={submitUser}>Submit</button>
                                                 </div>
                                             </div>
-
-                                            {/* <fieldset className="form-check pl-0 mt-2 mb-2">
-                                                <input type="checkbox" id="is-active" className="check-control" defaultChecked={user.is_active} onChange={e => handleChange('is_active', e.target.checked)} />
-                                                <label for="is-active" style={{ paddingLeft: '10px' }}> Mark User Active </label>
-                                            </fieldset> */}
-
-
                                         </div>
                                     </div>
                                 </div>

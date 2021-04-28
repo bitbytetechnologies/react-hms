@@ -102,7 +102,7 @@ function AssignStaff(props) {
                                     <li className="breadcrumb-item">
                                         <Link to="/">Home</Link>
                                     </li>
-                                    <li className="breadcrumb-item active"> <Link to="/notifications"> Notifications </Link> </li>
+                                    <li className="breadcrumb-item active"> <Link to="/requests"> Notifications </Link> </li>
                                     <li className="breadcrumb-item active">Assign Staff</li>
                                 </ol>
                             </div>

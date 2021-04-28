@@ -10,7 +10,7 @@ import UsersList from './Components/Management/UsersList';
 import AssignStaff from './Components/Management/AssignStaff';
 import MedicationReport from './Components/Management/MedicationReport';
 import SearchLocation from './Components/Client/SearchLocation';
-import Notifications from './Components/Common/Notifictaions';
+import Requests from './Components/Common/Requests';
 
 import './App.css'
 import { useEffect, useState } from "react";
@@ -61,7 +61,7 @@ function App() {
 
             <Route exact path="/search-location"> <SearchLocation user={user} /> </Route>
 
-            <Route exact path="/notifications"> <Notifications user={user} /> </Route>
+            <Route exact path="/requests"> <Requests user={user} /> </Route>
           </div>
 
         }

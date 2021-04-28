@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom';
 import { API_URL } from '../../Constant';
 import parse from 'html-react-parser';
 
-function Notifications(props) {
+function Requests(props) {
 
 
-    const [notifications, setNotifications] = useState([])
+    const [requests, setRequests] = useState([])
     const [wait, setWait] = useState(false)
 
 
-    const getNotifications = async () => {
+    const getRequests = async () => {
 
         try {
+
             let u = JSON.parse(localStorage.getItem('user'))
             const URL = `${API_URL}/api/notifications/my/${u.result.id}`
             let resp = await fetch(URL)
             resp = await resp.json()
 
             if (resp.code === 1) {
-
-                setNotifications(resp.result)
+                setRequests(resp.result)
             }
 
         } catch (e) {
@@ -33,8 +33,6 @@ function Notifications(props) {
     const changeNotificatonStatus = async (index, req_id, status) => {
 
         try {
-
-
 
             const URL = `${API_URL}/api/notifications/mark_read`
             let resp = await fetch(URL, {
@@ -49,11 +47,10 @@ function Notifications(props) {
             resp = await resp.json()
 
             if (resp.code === 1) {
-                let n = [...notifications]
-                n[index]['approved'] = status
-                setNotifications(n)
+                let r = [...requests]
+                r[index]['approved'] = status
+                setRequests(r)
             }
-
 
         } catch (e) {
             console.error(e.message)
@@ -63,7 +60,7 @@ function Notifications(props) {
 
     useEffect(() => {
 
-        getNotifications()
+        getRequests()
 
         return () => { };
     }, []);
@@ -83,7 +80,7 @@ function Notifications(props) {
                                     <li className="breadcrumb-item">
                                         <Link to="/">Home</Link>
                                     </li>
-                                    <li className="breadcrumb-item active"> <Link to="/notifications"> Notifications </Link> </li>
+                                    <li className="breadcrumb-item active"> <Link to="/requests"> Requests </Link> </li>
                                 </ol>
                             </div>
                         </div>
@@ -94,7 +91,7 @@ function Notifications(props) {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title">Requests Notifications <span className="badge badge-pill badge-info">{notifications.length} </span> </h4>
+                                    <h4 className="card-title"> Requests List <span className="badge badge-pill badge-info">{requests.length} </span> </h4>
                                     <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                     <div className="heading-elements">
                                         <ul className="list-inline mb-0">
@@ -114,42 +111,33 @@ function Notifications(props) {
                                                     <th scope="col"> By </th>
                                                     <th scope="col"> Type </th>
                                                     <th scope="col"> Description </th>
-                                                    <th scope="col">
-
-                                                        <div>Action / Status</div>
-                                                        {/* <div className="form-check">
-                                                            <input className="form-check-input" onChange={(e)=>filterPending} type="checkbox" value="" id="flexCheckDefault" />
-                                                            <label className="form-check-label" for="flexCheckDefault">
-                                                                Filter Pending Requests
-                                                            </label>
-                                                        </div> */}
-                                                    </th>
+                                                    <th scope="col"> Action / Status </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {
-                                                    notifications.map((n, index) => {
+                                                    requests.map((r, index) => {
                                                         return (
 
-                                                            <tr key={n.id}>
+                                                            <tr key={r.id}>
                                                                 <th scope="row"> {index + 1} </th>
-                                                                <td> {n.send_by_user} </td>
-                                                                <td> {n.notification_type} </td>
-                                                                <td>  {parse(n.notification_text)}</td>
+                                                                <td> {r.send_by_user} </td>
+                                                                <td> {r.notification_type} </td>
+                                                                <td>  {parse(r.notification_text)}</td>
                                                                 <td style={{ justifyContent: 'center', verticalAlign: 'middle' }}>
 
-                                                                    {n.approved === 0 &&
+                                                                    {r.approved === 0 &&
                                                                         <div className="row">
-                                                                            <button className="btn btn-success" onClick={(e) => changeNotificatonStatus(index, n.ref_id, 1)} style={{ width: '70px', height: '30px', padding: '0', marginRight: '5px' }}> Accept</button>
-                                                                            <button className="btn btn-danger" onClick={(e) => changeNotificatonStatus(index, n.ref_id, 2)} style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
+                                                                            <button className="btn btn-success" onClick={(e) => changeNotificatonStatus(index, r.ref_id, 1)} style={{ width: '70px', height: '30px', padding: '0', marginRight: '5px' }}> Accept</button>
+                                                                            <button className="btn btn-danger" onClick={(e) => changeNotificatonStatus(index, r.ref_id, 2)} style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
                                                                         </div>
                                                                     }
-                                                                    {n.approved === 1 &&
+                                                                    {r.approved === 1 &&
                                                                         <div className="row">
-                                                                            <Link to={`/assign-staff?req=${n.ref_id}`}> <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-primary"> Assign Staff &#8594; </span></Link>
+                                                                            <Link to={`/assign-staff?req=${r.ref_id}`}> <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-primary"> Assign Staff &#8594; </span></Link>
                                                                         </div>
                                                                     }
-                                                                    {n.approved === 2 &&
+                                                                    {r.approved === 2 &&
                                                                         <div className="row">
                                                                             <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-secondary"> Rejected </span>
                                                                         </div>
@@ -174,4 +162,4 @@ function Notifications(props) {
     )
 }
 
-export default Notifications;
+export default Requests;
