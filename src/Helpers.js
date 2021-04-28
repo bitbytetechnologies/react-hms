@@ -4,7 +4,7 @@ export function getFormattedDate(date) {
     let month = (1 + date.getMonth()).toString().padStart(2, '0');
     let day = date.getDate().toString().padStart(2, '0');
 
-    return month + '-' + day + '-' + year;
+    return year + '-' + month + '-' + day;
 }
 
 export function setFormattedDate(date) {

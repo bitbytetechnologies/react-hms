@@ -1,13 +1,40 @@
+import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { API_URL, STAFF_OBJECT,  } from '../../Constant';
-import { getFormattedDate } from '../../Helpers';
+import { API_URL, STAFF_OBJECT, } from '../../Constant';
+import { getFormattedDate, getParameterByName } from '../../Helpers';
 
 
-function AssignStaff() {
+function AssignStaff(props) {
 
 
     const [roster, setRoster] = useState(STAFF_OBJECT)
+    const [alertMsg, setalertMsg] = useState({ display: false, type: '', message: '' })
+
+    const [users, setUsers] = useState([])
+
+    const getUsersList = async () => {
+
+
+        try {
+
+            const URL = `${API_URL}/api/users`
+            let resp = await fetch(URL)
+            resp = await resp.json()
+
+
+            if (resp.code === 1) {
+
+                setUsers(resp.result.filter(u => u.role_id === 2))
+            }
+
+
+        } catch (e) {
+            console.error(e.message)
+            setalertMsg({ display: true, class: 'danger', type: "Failed", message: e.message })
+        }
+
+    }
 
 
     const handleChange = (name, value) => {
@@ -15,13 +42,46 @@ function AssignStaff() {
         let r = { ...roster }
         r[name] = value
         setRoster(r)
+
+        setalertMsg({ display: false, type: '', message: '' })
+
     }
 
-    const submitRoster = () => {
+    const submitRoster = async () => {
+
+        if (roster.staff_id == 0) {
+            alert('Please select staff member')
+            return
+        }
+
+        try {
+
+            const req = getParameterByName('req')
+            const URL = `${API_URL}/api/notification/staff_roster`
+            let resp = await fetch(URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    req_id: req,
+                    manager_id: props.user.id,
+                    staff_requests: [{ ...roster }]
+                })
+            })
+
+            resp = await resp.json()
+
+            setalertMsg({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
+
+
+        } catch (e) {
+            console.error(e.message)
+        }
 
     }
 
     useEffect(() => {
+
+        getUsersList()
 
         return () => {
         };
@@ -64,7 +124,9 @@ function AssignStaff() {
                                                         <h4 className="card-title">Staff Roster</h4>
                                                     </div>
                                                     <div className="card-block">
-
+                                                        {alertMsg.display && <div class={`col-10 m-auto alert alert-${alertMsg.class} mb-2`} role="alertMsg">
+                                                            <strong> {alertMsg.type}! </strong> {alertMsg.message}
+                                                        </div>}
                                                         <div className="card-body col-md-12 col-xs-12 m-auto">
 
                                                             <div className="row justify-content-center">
@@ -76,9 +138,13 @@ function AssignStaff() {
                                                                         <fieldset className="form-group">
                                                                             <select className="form-control" id="basicSelect" onChange={(e) => handleChange('staff_id', e.target.value)}>
                                                                                 <option value=""> Please select ...</option>
-                                                                                <option value={1}> Tariq</option>
-                                                                                <option value={2}> Zohaib</option>
-
+                                                                                {
+                                                                                    users.map(u => {
+                                                                                        return (
+                                                                                            <option value={u.id}> {u.username} </option>
+                                                                                        )
+                                                                                    })
+                                                                                }
 
                                                                             </select>
                                                                         </fieldset>

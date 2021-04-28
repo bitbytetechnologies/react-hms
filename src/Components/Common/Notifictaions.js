@@ -94,7 +94,7 @@ function Notifications(props) {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title">Requests Notifications <span class="badge badge-pill badge-info">{notifications.length} </span> </h4>
+                                    <h4 className="card-title">Requests Notifications <span className="badge badge-pill badge-info">{notifications.length} </span> </h4>
                                     <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                     <div className="heading-elements">
                                         <ul className="list-inline mb-0">
@@ -118,8 +118,8 @@ function Notifications(props) {
 
                                                         <div>Action / Status</div>
                                                         {/* <div className="form-check">
-                                                            <input class="form-check-input" onChange={(e)=>filterPending} type="checkbox" value="" id="flexCheckDefault" />
-                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                            <input className="form-check-input" onChange={(e)=>filterPending} type="checkbox" value="" id="flexCheckDefault" />
+                                                            <label className="form-check-label" for="flexCheckDefault">
                                                                 Filter Pending Requests
                                                             </label>
                                                         </div> */}
@@ -131,7 +131,7 @@ function Notifications(props) {
                                                     notifications.map((n, index) => {
                                                         return (
 
-                                                            <tr>
+                                                            <tr key={n.id}>
                                                                 <th scope="row"> {index + 1} </th>
                                                                 <td> {n.send_by_user} </td>
                                                                 <td> {n.notification_type} </td>
@@ -146,15 +146,14 @@ function Notifications(props) {
                                                                     }
                                                                     {n.approved === 1 &&
                                                                         <div className="row">
-                                                                            <Link to={`/assign-staff?req=${n.ref_id}`}> <span style={{ fontSize: '1.2rem' }} class="badge badge-pill badge-success"> Assign Staff &#8594; </span></Link>
+                                                                            <Link to={`/assign-staff?req=${n.ref_id}`}> <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-primary"> Assign Staff &#8594; </span></Link>
                                                                         </div>
                                                                     }
                                                                     {n.approved === 2 &&
                                                                         <div className="row">
-                                                                            <span style={{ fontSize: '1.2rem' }} class="badge badge-pill badge-danger"> Rejected </span>
+                                                                            <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-secondary"> Rejected </span>
                                                                         </div>
                                                                     }
-
 
                                                                 </td>
                                                             </tr>

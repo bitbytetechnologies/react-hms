@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { API_URL, USER_OBJECT } from '../../Constant';
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getFormattedDate, getParameterByName, setFormattedDate } from '../../Helpers';
 
 function User() {
@@ -10,7 +10,7 @@ function User() {
     const id = getParameterByName('id')
     const [roles, setRoles] = useState([])
     const [user, setUser] = useState({ ...USER_OBJECT })
-    const [alert, setAlert] = useState({ display: false, type: '', message: '' })
+    const [alertMsg, setalertMsg] = useState({ display: false, type: '', message: '' })
     const [wait, setWait] = useState(false)
 
     const handleChange = (name, value) => {
@@ -19,7 +19,7 @@ function User() {
         u[name] = value
         setUser(u)
 
-        console.log(u)
+        setalertMsg({ display: false, type: '', message: '' })
 
     }
 
@@ -42,7 +42,7 @@ function User() {
             })
             resp = await resp.json()
 
-            setAlert({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
+            setalertMsg({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
 
             if (resp.code === 1) {
                 setTimeout(() => {
@@ -53,7 +53,7 @@ function User() {
         } catch (e) {
 
             console.error(e.message)
-            setAlert({ display: true, class: 'danger', type: "Failed", message: e.message })
+            setalertMsg({ display: true, class: 'danger', type: "Failed", message: e.message })
 
         }
 
@@ -71,13 +71,15 @@ function User() {
 
             setRoles(resp.result)
 
+            if (id) {
+                getUser()
+            }
+
         } catch (e) {
             console.error(e.message)
         }
 
-        if (id) {
-            getUser()
-        }
+
 
     }
 
@@ -93,7 +95,7 @@ function User() {
 
                 const result = resp.result[0]
                 setUser(result)
-
+                debugger
             }
 
         } catch (e) {
@@ -111,7 +113,7 @@ function User() {
     }, []);
 
     return (
-        <div className="app-content content">
+        roles && <div className="app-content content">
             <div className="content-wrapper">
                 <div className="content-wrapper-before"></div>
                 <div className="content-header row">
@@ -122,7 +124,7 @@ function User() {
                         <div className="breadcrumbs-top float-md-right">
                             <div className="breadcrumb-wrapper mr-1">
                                 <ol className="breadcrumb">
-                                    <li className="breadcrumb-item"><a href="index.html">Home</a>
+                                    <li className="breadcrumb-item"><Link to="/">Home</Link>
                                     </li>
                                     <li className="breadcrumb-item active"> {id ? 'Existing Users - Update ' : ''} User
                                     </li>
@@ -141,8 +143,8 @@ function User() {
                                     </div>
                                     <div className="card-block">
 
-                                        {alert.display && <div class={`col-6 m-auto alert alert-${alert.class} mb-2`} role="alert">
-                                            <strong> {alert.type}! </strong> {alert.message}
+                                        {alertMsg.display && <div className={`col-10 m-auto alert alert-${alertMsg.class} mb-2`} role="alert">
+                                            <strong> {alertMsg.type}! </strong> {alertMsg.message}
                                         </div>}
 
                                         <div className="card-body col-md-12 col-xs-12 m-auto">
@@ -153,12 +155,12 @@ function User() {
                                                     <h5 className="mt-2">Role</h5>
                                                     <fieldset className="form-group">
                                                         <select className="form-control" id="basicSelect" onChange={(e) => handleChange('role_id', e.target.value)}>
-                                                            <option value={user.role_id}> Please select ...</option>
+                                                            <option value={0}> Please select ...</option>
                                                             {
                                                                 roles && roles.map(r => {
                                                                     return (
                                                                         user.role_id === r.id ? <option selected value={r.id}> {r.name}</option> :
-                                                                            <option value={r.id}> {r.name}</option>
+                                                                            <option key={r.id} value={r.id}> {r.name}</option>
                                                                     )
                                                                 })
                                                             }
@@ -177,7 +179,7 @@ function User() {
                                                     <Fragment>
                                                         <h5 className="mt-2">Email</h5>
                                                         <fieldset className="form-group">
-                                                            <input type="email" className="form-control" value={user.email} onChange={e => handleChange('email', e.target.value)} />
+                                                            <input disabled={id ? true : false} type="email" className="form-control" value={user.email} onChange={e => handleChange('email', e.target.value)} />
                                                         </fieldset>
                                                     </Fragment>
 
@@ -216,7 +218,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">Emergency Contact</h5>
                                                         <fieldset className="form-group">
@@ -236,7 +238,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">WWC No.</h5>
                                                         <fieldset className="form-group">
@@ -244,14 +246,14 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
                                                         <h5 className="mt-2">Car Registratioon No.</h5>
                                                         <fieldset className="form-group">
                                                             <input type="text" className="form-control" value={user.car_reg_no} onChange={e => handleChange('car_reg_no', e.target.value)} />
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">Account No.</h5>
                                                         <fieldset className="form-group">
@@ -259,7 +261,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">Account Title</h5>
                                                         <fieldset className="form-group">
@@ -267,7 +269,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">BSB</h5>
                                                         <fieldset className="form-group">
@@ -275,7 +277,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">Level of Work</h5>
                                                         <fieldset className="form-group">
@@ -287,7 +289,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {user.role_id === "3" && <Fragment>
+                                                    {user.role_id == "3" && <Fragment>
 
                                                         <h5 className="mt-2">Disability Type</h5>
                                                         <fieldset className="form-group">
@@ -295,7 +297,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {user.role_id === "3" && <Fragment>
+                                                    {user.role_id == "3" && <Fragment>
 
                                                         <h5 className="mt-2">Parent Guardian Details</h5>
                                                         <fieldset className="form-group">
@@ -303,7 +305,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {user.role_id === "3" && <Fragment>
+                                                    {user.role_id == "3" && <Fragment>
 
                                                         <h5 className="mt-2">Last Address</h5>
                                                         <fieldset className="form-group">
@@ -311,7 +313,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {(user.role_id === "1" || user.role_id === "2") && <Fragment>
+                                                    {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
                                                         <h5 className="mt-2">What client likes ?</h5>
                                                         <fieldset className="form-group">
@@ -319,7 +321,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {user.role_id === "3" && <Fragment>
+                                                    {user.role_id == "3" && <Fragment>
 
                                                         <h5 className="mt-2">Doctor</h5>
                                                         <fieldset className="form-group">
@@ -327,7 +329,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {user.role_id === "3" && <Fragment>
+                                                    {user.role_id == "3" && <Fragment>
 
                                                         <h5 className="mt-2">Doctor Contact #</h5>
                                                         <fieldset className="form-group">
@@ -335,7 +337,7 @@ function User() {
                                                         </fieldset>
                                                     </Fragment>}
 
-                                                    {user.role_id === "3" && <Fragment>
+                                                    {user.role_id == "3" && <Fragment>
 
                                                         <h5 className="mt-2">Doctor Address</h5>
                                                         <fieldset className="form-group">
