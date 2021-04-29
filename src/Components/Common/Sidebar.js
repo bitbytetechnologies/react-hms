@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 function Sidebar(props) {
@@ -17,16 +17,29 @@ function Sidebar(props) {
             </div>
             <div className="main-menu-content">
                 <ul className="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/requests' ? 'active' : ''}`}><Link to="/requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Client Requestes </span></Link>
-                    </li>}
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/user' ? 'active' : ''}`}><Link to="/user"><i className="ft-user"></i><span className="menu-title" data-i18n=""> Create User </span></Link>
-                    </li>}
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n=""> Users List </span></Link>
-                    </li>}
-                    {props.user.role_id === 1 && <li className={`nav-item ${window.location.pathname === '/medication-report' ? 'active' : ''}`}><Link to="/medication-report"><i className="ft-book"></i><span className="menu-title" data-i18n=""> Madication Report </span></Link>
-                    </li>}
-                    {props.user.role_id === 3 && <li className={`nav-item ${window.location.pathname === '/search-location' ? 'active' : ''}`}><Link to="/search-location"><i className="ft-search"></i><span className="menu-title" data-i18n=""> Search Location </span></Link>
-                    </li>}
+                    {props.user.role_id == 1 && <Fragment>
+                        <li className={`nav-item ${window.location.pathname === '/requests' ? 'active' : ''}`}><Link to="/requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Client Requestes </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/user' ? 'active' : ''}`}><Link to="/user"><i className="ft-user"></i><span className="menu-title" data-i18n=""> Create User </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n=""> Users List </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/medication-report' ? 'active' : ''}`}><Link to="/medication-report"><i className="ft-book"></i><span className="menu-title" data-i18n=""> Madication Report </span></Link></li>
+                    </Fragment>}
+
+
+                    {props.user.role_id == 2 && <Fragment>
+                        <li className={`nav-item ${window.location.pathname === '/roster-requests' ? 'active' : ''}`}><Link to="/roster-requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Roster Requests </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/staff-progress' ? 'active' : ''}`}><Link to="/staff-progress"><i className="ficon ft-activity"></i><span className="menu-title" data-i18n=""> Sumbit Progress </span></Link></li>
+                    </Fragment>}
+
+
+
+                    {props.user.role_id == 3 && <Fragment>
+                        <li className={`nav-item ${window.location.pathname === '/search-location' ? 'active' : ''}`}><Link to="/search-location"><i className="ft-search"></i><span className="menu-title" data-i18n=""> Search Location </span></Link>
+                        </li>
+
+                    </Fragment>}
+
+
+
                 </ul>
             </div>
             <div className="navigation-background"></div>

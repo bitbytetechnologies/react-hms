@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Navbar from './Components/Common/Navbar';
 import Sidebar from './Components/Common/Sidebar';
@@ -11,9 +12,10 @@ import AssignStaff from './Components/Management/AssignStaff';
 import MedicationReport from './Components/Management/MedicationReport';
 import SearchLocation from './Components/Client/SearchLocation';
 import Requests from './Components/Common/Requests';
+import RoasterRequests from './Components/Staff/RosterRequests';
+import StaffProgress from './Components/Staff/StaffProgress';
 
 import './App.css'
-import { useEffect, useState } from "react";
 
 function App() {
 
@@ -62,6 +64,14 @@ function App() {
             <Route exact path="/search-location"> <SearchLocation user={user} /> </Route>
 
             <Route exact path="/requests"> <Requests user={user} /> </Route>
+
+            <Route exact path="/roster-requests"> <RoasterRequests user={user} /> </Route>
+
+            <Route exact path="/staff-progress"> <StaffProgress user={user} /> </Route>
+
+            {/* <Route exact path="/progress-report"> <StaffProgressReport user={user} /> </Route> */}
+
+
           </div>
 
         }
