@@ -43,3 +43,13 @@ export const STAFF_OBJECT = {
     from_time: time,
     to_time: time
 }
+
+
+export const PROGRESS_OBJECT = {
+    "staff_id" : 0,
+    "roster_id"   : 0,
+    "roster_date":setFormattedDate(new Date()),
+    "from_time" : time,
+    "to_time" : time,
+    "details" : ""
+ }

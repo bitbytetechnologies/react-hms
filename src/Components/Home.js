@@ -3,18 +3,16 @@ import React from 'react';
 function Home() {
 
     return (
-
-
         <div className="app-content content">
             <div className="content-wrapper mt-5">
                 <div className="col-md-8 col-sm-12 m-auto">
-                    <div className="card" style={{opacity: '0.95'}}>
+                    <div className="card" style={{ opacity: '0.95' }}>
                         <div className="card-content collapse show">
                             <div className="card-body mt-5 mb-5">
                                 <div className="col-8 m-auto">
-                                    <h1 style={{fontSize: '4rem', borderBottomStyle: 'groove', borderBlockEndWidth: '1px', borderBottomColor: '#4693ab', color: '#e3a372' }}> Welcome</h1>
+                                    <h1 style={{ fontSize: '4rem', borderBottomStyle: 'groove', borderBlockEndWidth: '1px', borderBottomColor: '#4693ab', color: '#e3a372' }}> Welcome</h1>
 
-                                    <p className="mt-5" style={{fontSize: '1.5rem'}}>
+                                    <p className="mt-5" style={{ fontSize: '1.5rem' }}>
                                         We are delighted that you have selected our hotel. <br />
                                         <br />
                                         On behalf of the entire team, I extend you a very warm welcome and trust your stay with us will be both enjoyable and comfortable. <br />

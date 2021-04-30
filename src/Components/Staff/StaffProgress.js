@@ -1,41 +1,15 @@
 import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { API_URL, STAFF_OBJECT, } from '../../Constant';
-import { getFormattedDate, getParameterByName } from '../../Helpers';
+import { API_URL, PROGRESS_OBJECT, STAFF_OBJECT, } from '../../Constant';
+import { convertToAMPM, getParameterByName } from '../../Helpers';
 
 
 function StaffProgress(props) {
 
 
-    const [roster, setRoster] = useState(STAFF_OBJECT)
+    const [roster, setRoster] = useState({ ...PROGRESS_OBJECT })
     const [alertMsg, setalertMsg] = useState({ display: false, type: '', message: '' })
-
-    const [users, setUsers] = useState([])
-
-    const getUsersList = async () => {
-
-
-        try {
-
-            const URL = `${API_URL}/api/users`
-            let resp = await fetch(URL)
-            resp = await resp.json()
-
-
-            if (resp.code === 1) {
-
-                setUsers(resp.result.filter(u => u.role_id === 2))
-            }
-
-
-        } catch (e) {
-            console.error(e.message)
-            setalertMsg({ display: true, class: 'danger', type: "Failed", message: e.message })
-        }
-
-    }
-
 
     const handleChange = (name, value) => {
 
@@ -54,18 +28,18 @@ function StaffProgress(props) {
             return
         }
 
+        // let r = { ...roster }
+        // r.to_time = convertToAMPM(r.to_time)
+        // r.from_time = convertToAMPM(r.from_time)
+
         try {
 
             const req = getParameterByName('req')
-            const URL = `${API_URL}/api/notification/staff_roster`
+            const URL = `${API_URL}/api/staff/progress`
             let resp = await fetch(URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    req_id: req,
-                    manager_id: props.user.id,
-                    staff_requests: [{ ...roster }]
-                })
+                body: JSON.stringify({ ...roster })
             })
 
             resp = await resp.json()
@@ -79,9 +53,25 @@ function StaffProgress(props) {
 
     }
 
+
+    const initaialRoster = () => {
+
+        let staff_id = props.user.id
+        let roster_id = getParameterByName('id')
+        let req_id = getParameterByName('req_id')
+
+        let r = { ...roster }
+        r.staff_id = staff_id.toString()
+        r.roster_id = roster_id.toString()
+        setRoster(r)
+
+    }
+
     useEffect(() => {
 
-        return () => {};
+        initaialRoster()
+
+        return () => { };
     }, []);
 
     return (
@@ -99,7 +89,7 @@ function StaffProgress(props) {
                                     <li className="breadcrumb-item">
                                         <Link to="/">Home</Link>
                                     </li>
-                                    <li className="breadcrumb-item active"> <Link to="/roster-requests"> Staff Roaster </Link> </li>
+                                    <li className="breadcrumb-item active"> <Link to="/approved-rosters"> Approved Rosters </Link> </li>
                                     <li className="breadcrumb-item active"> Submit Progress</li>
                                 </ol>
                             </div>
@@ -140,7 +130,7 @@ function StaffProgress(props) {
                                                                     <Fragment>
                                                                         <h5 className="mt-2">Roster Date</h5>
                                                                         <fieldset className="form-group">
-                                                                            <input type="date" className="form-control" value={roster.roster_date} onChange={e => handleChange('from_date', e.target.value)} />
+                                                                            <input type="date" className="form-control" value={roster.roster_date} onChange={e => handleChange('roster_date', e.target.value)} />
                                                                         </fieldset>
                                                                     </Fragment>
 

@@ -16,6 +16,7 @@ function SearchLocation() {
     return (
         <div className="app-content content">
             <div className="content-wrapper">
+                <h5> Select Location </h5>
                 <fieldset className="form-group">
                     <Autocomplete
                         style={{

@@ -14,6 +14,7 @@ import SearchLocation from './Components/Client/SearchLocation';
 import Requests from './Components/Common/Requests';
 import RoasterRequests from './Components/Staff/RosterRequests';
 import StaffProgress from './Components/Staff/StaffProgress';
+import ApprovedRosters from './Components/Staff/ApprovedRosters';
 
 import './App.css'
 
@@ -67,7 +68,10 @@ function App() {
 
             <Route exact path="/roster-requests"> <RoasterRequests user={user} /> </Route>
 
+            <Route exact path="/approved-rosters"> <ApprovedRosters user={user}/> </Route>
+
             <Route exact path="/staff-progress"> <StaffProgress user={user} /> </Route>
+
 
             {/* <Route exact path="/progress-report"> <StaffProgressReport user={user} /> </Route> */}
 

@@ -27,7 +27,7 @@ function Sidebar(props) {
 
                     {props.user.role_id == 2 && <Fragment>
                         <li className={`nav-item ${window.location.pathname === '/roster-requests' ? 'active' : ''}`}><Link to="/roster-requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Roster Requests </span></Link></li>
-                        <li className={`nav-item ${window.location.pathname === '/staff-progress' ? 'active' : ''}`}><Link to="/staff-progress"><i className="ficon ft-activity"></i><span className="menu-title" data-i18n=""> Sumbit Progress </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/approved-rosters' ? 'active' : ''}`}><Link to="/approved-rosters"><i className="ficon ft-activity"></i><span className="menu-title" data-i18n=""> Approved Rosters </span></Link></li>
                     </Fragment>}
 
 
