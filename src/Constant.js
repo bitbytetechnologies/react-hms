@@ -46,10 +46,45 @@ export const STAFF_OBJECT = {
 
 
 export const PROGRESS_OBJECT = {
-    "staff_id" : 0,
-    "roster_id"   : 0,
-    "roster_date":setFormattedDate(new Date()),
-    "from_time" : time,
-    "to_time" : time,
-    "details" : ""
- }
+    "staff_id": 0,
+    "roster_id": 0,
+    "roster_date": setFormattedDate(new Date()),
+    "from_time": time,
+    "to_time": time,
+    "details": ""
+}
+
+export const MEDICATION_OBJECT = [
+    {
+        "date": setFormattedDate(date),
+        "roster_id": 0,
+        "type": "Morning",
+        "is_taken": 0,
+        "details": "",
+        "created_by": 0 //Staff ID
+    },
+    {
+        "date": setFormattedDate(date),
+        "roster_id": 0,
+        "type": "Afternoon",
+        "is_taken": 0,
+        "details": "",
+        "created_by": 0 //Staff ID
+    },
+    {
+        "date": setFormattedDate(date),
+        "roster_id": 0,
+        "type": "Evening",
+        "is_taken": 0,
+        "details": "",
+        "created_by": 0 //Staff ID
+    },
+    {
+        "date": setFormattedDate(date),
+        "roster_id": 0,
+        "type": "Bed time",
+        "is_taken": 0,
+        "details": "",
+        "created_by": 0 //Staff ID
+    },
+]
