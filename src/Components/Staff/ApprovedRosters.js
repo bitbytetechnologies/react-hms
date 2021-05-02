@@ -122,7 +122,7 @@ function ApprovedRosters(props) {
                                                     <th scope="col"> Hours </th>
                                                     <th scope="col"> Start Time</th>
                                                     <th scope="col"> End Time</th>
-                                                    <th scope="col"> Action / Status </th>
+                                                    <th scope="col"> Actions </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -138,14 +138,11 @@ function ApprovedRosters(props) {
                                                                 <td className="align-middle"> {r.from_time} </td>
                                                                 <td className="align-middle"> {r.to_time} </td>
                                                                 <td className="align-middle" style={{ justifyContent: 'center', verticalAlign: 'middle' }}>
-
                                                                     <div className="row">
-                                                                        <Link to={`/staff-progress?id=${r.id}`}> <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-primary"> Progress  </span></Link>
+                                                                        <Link to={`/staff-progress?id=${r.id}`}> <span style={{ fontSize: '1.2rem', width: '100px', marginRight: '5px' }} className="badge badge-primary"> Progress  </span></Link>
+                                                                        <Link to={`/medication?id=${r.id}`}> <span style={{ fontSize: '1.2rem', width: '100px' }} className="badge badge-info"> Medication  </span></Link>
                                                                     </div>
-                                                                    <div className="row">
-                                                                        <Link to={`/medication?id=${r.id}`} className="mt-1"> <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-warning"> Medication  </span></Link>
-                                                                    </div>
-
+                                                                    
 
                                                                 </td>
                                                             </tr>

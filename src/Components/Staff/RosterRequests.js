@@ -145,12 +145,12 @@ function RoasterRequests(props) {
                                                                             <button className="btn btn-danger" onClick={(e) => changeNotificatonStatus(index, r.id, r.req_id, "rejected")} style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
                                                                         </div>
                                                                     }
-                                                                    {r.accept &&
+                                                                    {r.accept === 1 &&
                                                                         <div className="row">
                                                                             <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-success"> Accepted </span>
                                                                         </div>
                                                                     }
-                                                                    {r.reject &&
+                                                                    {r.reject === 1 &&
                                                                         <div className="row">
                                                                             <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-secondary"> Rejected </span>
                                                                         </div>

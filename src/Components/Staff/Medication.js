@@ -78,6 +78,13 @@ function Medication(props) {
         resp = await resp.json()
 
         if (resp.result && resp.result.length > 0) {
+
+            if (dateChange) {
+                for (var i = 0; i < resp.result.length; i++) {
+                    resp.result[i]['date'] = dateChange
+                }
+            }
+
             setMedication([...resp.result])
             setD(dateChange)
         } else {

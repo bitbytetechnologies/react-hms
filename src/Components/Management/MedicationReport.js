@@ -1,7 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
+import { API_URL } from '../../Constant';
 
 function MedicationReport() {
+
+
+    const colors = ['#E38627', '#c47f3a', '#c96604', '#fcb874']
+    const [report, setReport] = useState([])
+
+
+    const getReport = async () => {
+
+        try {
+
+            const URL = `${API_URL}/api/medication/summary`
+            let resp = await fetch(URL)
+            resp = await resp.json()
+
+            if (resp.code === 1 && resp.result) {
+
+                let arr = []
+                for (var i = 0; i < resp.result.length; i++) {
+                    arr.push({ title: resp.result[i].type, value: resp.result[i].avg, color: colors[i] })
+                }
+                setReport(arr)
+            }
+        } catch (e) {
+            console.error(e.message)
+        }
+
+
+
+    }
+
+    useEffect(() => {
+
+        getReport()
+
+        return () => { };
+
+    }, []);
+
     return (
         <div className="app-content content">
             <div className="content-wrapper">
@@ -47,18 +86,16 @@ function MedicationReport() {
                                             <div className="col-sm-12 col-md-5 m-auto">
                                                 <div className="row mb-3">
                                                     <div className="m-auto">
-                                                        <span style={{ backgroundColor: '#E38627', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Morning </span>
-                                                        <span style={{ backgroundColor: '#C13C37', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Afternoon </span>
-                                                        <span style={{ backgroundColor: '#6A2135', color: 'white', marginLeft: '5px', fontWeight: 'bold' }}> Evening </span>
+                                                        {report.map(r=> {
+                                                            return(
+                                                                <span style={{ backgroundColor: `${r.color}`, color: 'white', marginLeft: '5px', fontWeight: 'bold'}}> {r.title} </span>
+                                                            )
+                                                        })}
                                                     </div>
                                                 </div>
                                                 <div className="row">
                                                     <PieChart
-                                                        data={[
-                                                            { title: 'Morning', value: 20, color: '#E38627' },
-                                                            { title: 'Afternoon', value: 50, color: '#C13C37' },
-                                                            { title: 'Evening', value: 30, color: '#6A2135' },
-                                                        ]}
+                                                        data={[...report]}
                                                         totalValue={100}
                                                         lineWidth={100}
                                                         label={({ dataEntry }) => dataEntry.value + '%'}
