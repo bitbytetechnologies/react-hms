@@ -33,7 +33,7 @@ function RoasterRequests(props) {
 
     const changeNotificatonStatus = async (index, roster_id, req_id, status) => {
 
-        console.log(index,roster_id, req_id, status)
+        console.log(index, roster_id, req_id, status)
         try {
 
             let body = [{
@@ -42,8 +42,7 @@ function RoasterRequests(props) {
                 "staff_id": props.user.id
             }]
 
-            if (status === "accepted") body[0]['accept'] = 1
-            else body[0]['reject'] = 1
+            body[0]['accept'] = status === "accepted" ? 1 : 2
 
             const URL = `${API_URL}/api/staff/approve_roster`
             let resp = await fetch(URL, {
@@ -55,9 +54,8 @@ function RoasterRequests(props) {
 
             if (resp.code === 1) {
                 let r = [...requests]
-                
-                if(status === "accepted") r[index]['accept'] = 1
-                else r[index]['reject'] = 1
+
+                r[index]['accept'] = status === "accepted" ? 1 : 2
                 setRequests(r)
             }
 
@@ -139,7 +137,7 @@ function RoasterRequests(props) {
                                                                 <td> {r.to_time} </td>
                                                                 <td style={{ justifyContent: 'center', verticalAlign: 'middle' }}>
 
-                                                                    {!r.accept && !r.reject &&
+                                                                    {r.accept === 0 &&
                                                                         <div className="row">
                                                                             <button className="btn btn-success" onClick={(e) => changeNotificatonStatus(index, r.id, r.req_id, "accepted")} style={{ width: '70px', height: '30px', padding: '0', marginRight: '5px' }}> Accept</button>
                                                                             <button className="btn btn-danger" onClick={(e) => changeNotificatonStatus(index, r.id, r.req_id, "rejected")} style={{ width: '70px', height: '30px', padding: '0' }}> Reject</button>
@@ -150,7 +148,7 @@ function RoasterRequests(props) {
                                                                             <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-success"> Accepted </span>
                                                                         </div>
                                                                     }
-                                                                    {r.reject === 1 &&
+                                                                    {r.accept === 2 &&
                                                                         <div className="row">
                                                                             <span style={{ fontSize: '1.2rem', width: '145px' }} className="badge badge-secondary"> Rejected </span>
                                                                         </div>

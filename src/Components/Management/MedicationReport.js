@@ -5,7 +5,7 @@ import { API_URL } from '../../Constant';
 function MedicationReport() {
 
 
-    const colors = ['#E38627', '#c47f3a', '#c96604', '#fcb874']
+    const colors = ['#58508d', '#bc5090', '#ff6361', '#ffa600']
     const [report, setReport] = useState([])
 
 
@@ -86,9 +86,9 @@ function MedicationReport() {
                                             <div className="col-sm-12 col-md-5 m-auto">
                                                 <div className="row mb-3">
                                                     <div className="m-auto">
-                                                        {report.map(r=> {
-                                                            return(
-                                                                <span style={{ backgroundColor: `${r.color}`, color: 'white', marginLeft: '5px', fontWeight: 'bold'}}> {r.title} </span>
+                                                        {report.map(r => {
+                                                            return (
+                                                                <span style={{ backgroundColor: `${r.color}`, color: 'white', marginLeft: '5px', fontWeight: 'bold', fontSize: '1.5rem', padding: '5px' }}> {r.title} </span>
                                                             )
                                                         })}
                                                     </div>

@@ -16,6 +16,8 @@ import RoasterRequests from './Components/Staff/RosterRequests';
 import StaffProgress from './Components/Staff/StaffProgress';
 import ApprovedRosters from './Components/Staff/ApprovedRosters';
 import Medication from './Components/Staff/Medication';
+import ProgressReport from './Components/Staff/ProgressReport';
+
 
 import './App.css'
 
@@ -75,9 +77,7 @@ function App() {
 
             <Route exact path="/medication"> <Medication user={user} /> </Route>
 
-
-            {/* <Route exact path="/progress-report"> <StaffProgressReport user={user} /> </Route> */}
-
+            <Route exact path="/progress-report"> <ProgressReport user={user} /> </Route>
 
           </div>
 

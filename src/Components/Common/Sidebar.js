@@ -9,7 +9,7 @@ function Sidebar(props) {
                     <li className="nav-item mr-auto">
                         <Link className="navbar-brand" to="/">
                             <img className="brand-logo" alt="Chameleon admin logo" src="theme-assets/images/logo/logo.png" />
-                            <h3 className="brand-text">HMS</h3>
+                            <h4 className="brand-text" style={{fontSize: '1.2rem'}}>Southern Star Care</h4>
                         </Link>
                     </li>
                     <li className="nav-item d-md-none"><a className="nav-link close-navbar"><i className="ft-x"></i></a></li>
@@ -27,7 +27,8 @@ function Sidebar(props) {
 
                     {props.user.role_id == 2 && <Fragment>
                         <li className={`nav-item ${window.location.pathname === '/roster-requests' ? 'active' : ''}`}><Link to="/roster-requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Roster Requests </span></Link></li>
-                        <li className={`nav-item ${window.location.pathname === '/approved-rosters' ? 'active' : ''}`}><Link to="/approved-rosters"><i className="ficon ft-activity"></i><span className="menu-title" data-i18n=""> Approved Rosters </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/approved-rosters' ? 'active' : ''}`}><Link to="/approved-rosters"><i className="ficon ft-check"></i><span className="menu-title" data-i18n=""> Approved Rosters </span></Link></li>
+                        <li className={`nav-item ${window.location.pathname === '/progress-report' ? 'active' : ''}`}><Link to="/progress-report"><i className="ficon ft-activity"></i><span className="menu-title" data-i18n=""> Progress Report </span></Link></li>
                     </Fragment>}
 
 
