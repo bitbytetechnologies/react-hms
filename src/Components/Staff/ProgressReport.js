@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import { API_URL } from '../../Constant';
+import { getFormattedDate } from '../../Helpers';
 
 function ProgressReport(props) {
 
 
-    const colors = ['#58508d', '#bc5090', '#ff6361', '#ffa600']
     const [report, setReport] = useState([])
+    const [date, setDate] = useState(getFormattedDate(new Date()))
+
+    const dateHandle = (value) => {
+        setDate(value)
+        getReport(value)
+    }
 
 
-    const getReport = async () => {
+    const getReport = async (d) => {
 
         try {
-
             const URL = `${API_URL}/api/staff_progress/report`
             let resp = await fetch(URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ staff_id: props.user.id, date: "2021-05-06" })
+                body: JSON.stringify({ staff_id: props.user.id, date: d })
             })
-            resp = await resp.json()
 
+            resp = await resp.json()
             console.log(resp)
 
-            
+            if (resp.code === 1 && resp.result) {
+                setReport([...resp.result])
+            } else {
+                setReport([])
+            }
+
+            date = d
+
         } catch (e) {
             console.error(e.message)
         }
@@ -67,7 +79,7 @@ function ProgressReport(props) {
                             <div className="col-12 m-auto mt-5">
                                 <div className="card">
                                     <div className="card-header">
-                                        <h4 className="card-title">Porgress Details</h4>
+                                        <h4 className="card-title">Today's Porgress Details</h4>
                                         <br />
                                         <a className="heading-elements-toggle"><i className="la la-ellipsis-v font-medium-3"></i></a>
                                         <div className="heading-elements">
@@ -82,42 +94,47 @@ function ProgressReport(props) {
                                     <div className="card-content collapse show">
                                         <div className="card-body">
                                             <div className="col-sm-12 col-md-10 m-auto">
+                                                <div className="row mb-2">
+                                                    <div className="col-12 col-md-12">
+                                                        <h5 className="">Date</h5>
+                                                        <fieldset className="form-group">
+                                                            <input type="date" className="form-control" value={date} onChange={e => { dateHandle(e.target.value) }} />
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
                                                 <table class="table table-sm">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">Start Date</th>
-                                                            <th scope="col">End Date</th>
+                                                            <th scope="col">Roster Date</th>
                                                             <th scope="col">Start Time</th>
                                                             <th scope="col">End Time</th>
-                                                            <th scope="col">Hours</th>
+                                                            <th scope="col">Description</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td> {"2021-05-06"} </td>
-                                                            <td>{"2021-05-06"}</td>
-                                                            <td> {"07:00"}</td>
-                                                            <td> {"17:00"} </td>
-                                                            <td> {"9"} </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td> {"2021-05-08"} </td>
-                                                            <td>{"2021-05-08"}</td>
-                                                            <td> {"07:00"}</td>
-                                                            <td> {"17:00"} </td>
-                                                            <td> {"9"} </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td> {"2021-05-08"} </td>
-                                                            <td>{"2021-05-08"}</td>
-                                                            <td> {"07:00"}</td>
-                                                            <td> {"17:00"} </td>
-                                                            <td> {"9"} </td>
-                                                        </tr>
+                                                        {report && report.map((r, index) => {
+                                                            return (
+                                                                <tr>
+                                                                    <td scope="row">{index + 1}</td>
+                                                                    <td> {getFormattedDate(new Date(r.roster_date))} </td>
+                                                                    <td>{r.from_time}</td>
+                                                                    <td> {r.to_time}</td>
+                                                                    <td> {r.details} </td>
+                                                                </tr>
+
+                                                            )
+                                                        })
+                                                        }
+                                                        {report.length === 0 &&
+                                                            <tr>
+                                                                <td><h5> No record found.</h5></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        }
                                                     </tbody>
                                                 </table>
 
