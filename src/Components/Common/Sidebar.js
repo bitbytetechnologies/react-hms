@@ -19,6 +19,7 @@ function Sidebar(props) {
                 <ul className="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                     {props.user.role_id == 1 && <Fragment>
 
+                        <li className={`nav-item ${window.location.pathname === '/new-roster' ? 'active' : ''}`}><Link to="/new-roster"><i className="ficon ft-edit"></i><span className="menu-title" data-i18n=""> New Roster Request </span></Link></li>
                         <li className={`nav-item ${window.location.pathname === '/requests' ? 'active' : ''}`}><Link to="/requests"><i className="ficon ft-mail"></i><span className="menu-title" data-i18n=""> Client Requestes </span></Link></li>
                         <li className={`nav-item ${window.location.pathname === '/user' ? 'active' : ''}`}><Link to="/user"><i className="ft-user"></i><span className="menu-title" data-i18n=""> Create User </span></Link></li>
                         <li className={`nav-item ${window.location.pathname === '/users-list' ? 'active' : ''}`}><Link to="/users-list"><i className="ft-list"></i><span className="menu-title" data-i18n=""> Users List </span></Link></li>

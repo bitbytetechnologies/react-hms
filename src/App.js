@@ -8,6 +8,7 @@ import Login from './Components/Login';
 import Home from './Components/Home';
 import User from './Components/Management/User';
 import UsersList from './Components/Management/UsersList';
+import ManagerRequest from './Components/Management/ManagerRequest';
 import AssignStaff from './Components/Management/AssignStaff';
 import MedicationReport from './Components/Management/MedicationReport';
 import LocationRequest from './Components/Client/LocationRequest';
@@ -18,7 +19,6 @@ import ApprovedRosters from './Components/Staff/ApprovedRosters';
 import Medication from './Components/Staff/Medication';
 import ProgressReport from './Components/Staff/ProgressReport';
 import ClientFeedback from './Components/Client/ClientFeedback';
-
 import './App.css'
 
 function App() {
@@ -60,6 +60,8 @@ function App() {
             <Route exact path="/update-user"> <User user={user} /> </Route>
 
             <Route exact path="/users-list"> <UsersList user={user} /> </Route>
+
+            <Route exact path="/new-roster"> <ManagerRequest user={user} /> </Route>
 
             <Route exact path="/assign-staff"> <AssignStaff user={user} /> </Route>
 
