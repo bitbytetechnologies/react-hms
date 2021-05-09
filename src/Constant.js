@@ -88,3 +88,23 @@ export const MEDICATION_OBJECT = [
         "created_by": 0 //Staff ID
     },
 ]
+
+export const CLIENT_REQUEST_OBJECT = {
+    "datetime": setFormattedDate(date),
+    "client_user_id": 0,
+    "city": "Canbera",
+    "country": "Aus",
+    "loc_attu": "2.123456",
+    "loc_long": "4.23456",
+    "request_status": "SENT",
+    "from_date": setFormattedDate(date),
+    "to_date": setFormattedDate(date),
+    "req_hours": 10
+}
+
+
+export const CLIENT_FEEBACK_OBJECT = {
+    "staff_id": 0,
+    "client_id": 0,
+    "details": ""
+}

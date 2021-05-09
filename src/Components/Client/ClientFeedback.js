@@ -1,14 +1,14 @@
 import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { API_URL, STAFF_OBJECT, } from '../../Constant';
+import { API_URL, CLIENT_FEEBACK_OBJECT, } from '../../Constant';
 import { getFormattedDate, getParameterByName } from '../../Helpers';
 
 
-function StaffProgress(props) {
+function ClientFeedback(props) {
 
 
-    const [feedback, setFeedback] = useState(STAFF_OBJECT)
+    const [feedback, setFeedback] = useState({ ...CLIENT_FEEBACK_OBJECT })
     const [alertMsg, setalertMsg] = useState({ display: false, type: '', message: '' })
 
     const [users, setUsers] = useState([])
@@ -18,14 +18,14 @@ function StaffProgress(props) {
 
         try {
 
-            const URL = `${API_URL}/api/users`
+            const URL = `${API_URL}/api/staff/${props.user.id}`
             let resp = await fetch(URL)
             resp = await resp.json()
 
 
             if (resp.code === 1) {
 
-                setUsers(resp.result.filter(u => u.role_id === 2))
+                setUsers([...resp.result])
             }
 
 
@@ -47,7 +47,7 @@ function StaffProgress(props) {
 
     }
 
-    const submitRoster = async () => {
+    const submitFeedback = async () => {
 
         if (feedback.staff_id == 0) {
             alert('Please select staff member')
@@ -56,16 +56,16 @@ function StaffProgress(props) {
 
         try {
 
+            let f = { ...feedback }
+            f.client_id = props.user.id
+            setFeedback(f)
+
             const req = getParameterByName('req')
-            const URL = `${API_URL}/api/notification/staff_roster`
+            const URL = `${API_URL}/api/client/feedback`
             let resp = await fetch(URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    req_id: req,
-                    manager_id: props.user.id,
-                    staff_requests: [{ ...feedback }]
-                })
+                body: JSON.stringify({ ...f })
             })
 
             resp = await resp.json()
@@ -81,7 +81,9 @@ function StaffProgress(props) {
 
     useEffect(() => {
 
-        return () => {};
+        getUsersList()
+
+        return () => { };
     }, []);
 
     return (
@@ -132,15 +134,22 @@ function StaffProgress(props) {
                                                                     <Fragment>
                                                                         <h5 className="mt-2">Staff Member</h5>
                                                                         <fieldset className="form-group">
-                                                                            <input type="date" className="form-control" value={feedback.staff_id} onChange={e => handleChange('from_date', e.target.value)} />
+                                                                            <select className="form-control" id="basicSelect" onChange={(e) => handleChange('staff_id', e.target.value)}>
+                                                                                <option value=""> Please select ...</option>
+                                                                                {
+                                                                                    users.map(u => {
+                                                                                        return (
+                                                                                            <option value={u.staff_user_id}> {u.staff_name} </option>
+                                                                                        )
+                                                                                    })
+                                                                                }
+
+                                                                            </select>
                                                                         </fieldset>
                                                                     </Fragment>
-
-
                                                                 </div>
 
                                                                 <div className="col-12 col-md-5 p-2">
-
 
                                                                     <Fragment>
                                                                         <h5 className="mt-2">Feedback details</h5>
@@ -149,11 +158,9 @@ function StaffProgress(props) {
                                                                         </fieldset>
                                                                     </Fragment>
 
-
-
                                                                 </div>
                                                                 <div className="form-group col-md-6 m-auto">
-                                                                    <button type="button" className="btn mb-1 btn-primary btn-lg btn-block mt-5 mb-5" onClick={() => submitRoster()}>Submit</button>
+                                                                    <button type="button" className="btn mb-1 btn-primary btn-lg btn-block mt-5 mb-5" onClick={() => submitFeedback()}>Submit</button>
                                                                 </div>
                                                             </div>
 

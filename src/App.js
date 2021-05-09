@@ -10,14 +10,14 @@ import User from './Components/Management/User';
 import UsersList from './Components/Management/UsersList';
 import AssignStaff from './Components/Management/AssignStaff';
 import MedicationReport from './Components/Management/MedicationReport';
-import SearchLocation from './Components/Client/SearchLocation';
+import LocationRequest from './Components/Client/LocationRequest';
 import Requests from './Components/Common/Requests';
 import RoasterRequests from './Components/Staff/RosterRequests';
 import StaffProgress from './Components/Staff/StaffProgress';
 import ApprovedRosters from './Components/Staff/ApprovedRosters';
 import Medication from './Components/Staff/Medication';
 import ProgressReport from './Components/Staff/ProgressReport';
-
+import ClientFeedback from './Components/Client/ClientFeedback';
 
 import './App.css'
 
@@ -65,19 +65,21 @@ function App() {
 
             <Route exact path="/medication-report"> <MedicationReport user={user} /> </Route>
 
-            <Route exact path="/search-location"> <SearchLocation user={user} /> </Route>
+            <Route exact path="/location-request"> <LocationRequest user={user} /> </Route>
 
             <Route exact path="/requests"> <Requests user={user} /> </Route>
 
             <Route exact path="/roster-requests"> <RoasterRequests user={user} /> </Route>
 
-            <Route exact path="/approved-rosters"> <ApprovedRosters user={user}/> </Route>
+            <Route exact path="/approved-rosters"> <ApprovedRosters user={user} /> </Route>
 
             <Route exact path="/staff-progress"> <StaffProgress user={user} /> </Route>
 
             <Route exact path="/medication"> <Medication user={user} /> </Route>
 
             <Route exact path="/progress-report"> <ProgressReport user={user} /> </Route>
+
+            <Route exact path="/client-feedback"> <ClientFeedback user={user} /> </Route>
 
           </div>
 
