@@ -46,6 +46,13 @@ function IncidentForm(props) {
 
             setalertMsg({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
 
+            if (resp.code === 1) {
+
+                setTimeout(() => {
+                    window.location.href = `/medication?id=${incident.roster_id}`
+                }, 3000)
+            }
+
         } catch (e) {
             console.error(e.message)
         }

@@ -17,6 +17,7 @@ function ProgressReport(props) {
 
     const getReport = async (d) => {
 
+        console.log(d)
         try {
             const URL = `${API_URL}/api/staff_progress/report`
             let resp = await fetch(URL, {
@@ -46,7 +47,7 @@ function ProgressReport(props) {
 
     useEffect(() => {
 
-        getReport()
+        getReport(getFormattedDate(new Date()))
 
         return () => { };
 

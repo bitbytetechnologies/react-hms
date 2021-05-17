@@ -72,7 +72,8 @@ export const PROGRESS_OBJECT = {
     "roster_date": setFormattedDate(new Date()),
     "from_time": time,
     "to_time": time,
-    "details": ""
+    "details": "",
+    "bill_amount": "0"
 }
 
 export const MEDICATION_OBJECT = [

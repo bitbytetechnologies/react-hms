@@ -134,6 +134,13 @@ function StaffProgress(props) {
                                                                         </fieldset>
                                                                     </Fragment>
 
+                                                                    <Fragment>
+                                                                        <h5 className="mt-2">Bill Amount</h5>
+                                                                        <fieldset className="form-group">
+                                                                            <input type="text" className="form-control" value={roster.bill_amount} onChange={e => handleChange('bill_amount', e.target.value)} />
+                                                                        </fieldset>
+                                                                    </Fragment>
+
 
                                                                 </div>
 
