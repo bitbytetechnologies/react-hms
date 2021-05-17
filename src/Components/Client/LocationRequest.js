@@ -1,5 +1,6 @@
 
-import Autocomplete from 'react-google-autocomplete';
+//import Autocomplete from 'react-google-autocomplete';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
 import React, { Fragment, useState, useEffect } from 'react';
@@ -14,17 +15,20 @@ function LocationRequest(props) {
 
     const [request, setRequest] = useState({ ...CLIENT_REQUEST_OBJECT })
     const [alertMsg, setalertMsg] = useState({ display: false, type: '', message: '' })
+    const [value, setValue] = useState(null);
 
     const onPlaceSelected = (place) => {
-        const address = place.formatted_address,
-            addressArray = place.address_components,
-            city = this.getCity(addressArray),
-            area = this.getArea(addressArray),
-            state = this.getState(addressArray),
-            latValue = place.geometry.location.lat(),
-            lngValue = place.geometry.location.lng();
 
-        console.log('address')
+
+        let r = { ...request }
+        r.loc_long = place.value.place_id
+        r.loc_attu = place.value.reference
+        r.city = place.value.structured_formatting.main_text
+        r.country = place.value.structured_formatting.secondary_text
+        
+        console.log('Place', place)
+        setRequest(r)
+        setValue(place)
     };
 
     const handleChange = (name, value) => {
@@ -44,7 +48,7 @@ function LocationRequest(props) {
             return
         }
 
-        let r = {...request}
+        let r = { ...request }
         r.client_user_id = props.user.id
         setRequest(r)
 
@@ -121,7 +125,7 @@ function LocationRequest(props) {
                                                                 <div className="col-10">
                                                                     <h5> Select Location </h5>
                                                                     <fieldset className="form-group">
-                                                                        <Autocomplete
+                                                                        {/* <Autocomplete
                                                                             // style={{
                                                                             //     width: '100%',
                                                                             //     height: '40px',
@@ -132,7 +136,11 @@ function LocationRequest(props) {
                                                                             onPlaceSelected={(e) => onPlaceSelected(e)}
                                                                             types={['(regions)']}
                                                                             className="form-control"
-                                                                        />
+                                                                        /> */}
+                                                                        <GooglePlacesAutocomplete apiKey="AIzaSyDhjIZPaGLecGz2QkuUe2cmrIfpx6ocjME" selectProps={{
+                                                                            value,
+                                                                            onChange: (e) => onPlaceSelected(e),
+                                                                        }} />
                                                                     </fieldset>
                                                                 </div>
 
