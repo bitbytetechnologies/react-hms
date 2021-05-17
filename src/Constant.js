@@ -82,7 +82,9 @@ export const MEDICATION_OBJECT = [
         "type": "Morning",
         "is_taken": 0,
         "details": "",
-        "created_by": 0 //Staff ID
+        "created_by": 0, //Staff ID
+        "incident_form_id": 0,
+        "vkey": ''
     },
     {
         "date": setFormattedDate(date),
@@ -90,7 +92,9 @@ export const MEDICATION_OBJECT = [
         "type": "Afternoon",
         "is_taken": 0,
         "details": "",
-        "created_by": 0 //Staff ID
+        "created_by": 0, //Staff ID
+        "incident_form_id": 0,
+        "vkey": ''
     },
     {
         "date": setFormattedDate(date),
@@ -98,7 +102,9 @@ export const MEDICATION_OBJECT = [
         "type": "Evening",
         "is_taken": 0,
         "details": "",
-        "created_by": 0 //Staff ID
+        "created_by": 0, //Staff ID
+        "incident_form_id": 0,
+        "vkey": ''
     },
     {
         "date": setFormattedDate(date),
@@ -106,7 +112,9 @@ export const MEDICATION_OBJECT = [
         "type": "Bed time",
         "is_taken": 0,
         "details": "",
-        "created_by": 0 //Staff ID
+        "created_by": 0, //Staff ID
+        "incident_form_id": 0,
+        "vkey": ''
     },
 ]
 
@@ -128,4 +136,34 @@ export const CLIENT_FEEBACK_OBJECT = {
     "staff_id": 0,
     "client_id": 0,
     "details": ""
+}
+
+export const INCIDENT_OBJECT = {
+
+    "date": setFormattedDate(date),
+    "support_worder": "Supported Worker edit",
+    "report_completed_by": "Report completed By Tariq",
+    "medications": "Peracitamol",
+    "medication_due_time": "8:00am breakfast medications",
+    "dose_should_given": "Dose Should Given Webster pack",
+    "dose_given": "Dose Given Webster pack",
+    "describe_medication_incident": "I mistakenly open Monday morning medications instead of Wednesday morning medications, but it was the same dose.",
+    "resson_for_incident": "I mistakenly open Monday morning medications instead of Wednesday morning medications.",
+    "action_taken": "",
+    "coodinator_notified": "1",
+    "doctor_notified": "1",
+    "pharmacist_notified": "1",
+    "kin_notified": "1",
+    "treatment_by": "Dr.munned mohammad. ",
+    "coordinator_to_complete": "coordic=nator Completed By",
+    "evaluation": "evaluation",
+    "issue_resolved": "1",
+    "no_improvement": "0",
+    "improvement_describe": "improvement describe",
+    "closed_outcome": "close outcome",
+    "roster_id": 0,
+    "filled_by_user": 0,
+    "id": 0,
+    "type": ''
+
 }

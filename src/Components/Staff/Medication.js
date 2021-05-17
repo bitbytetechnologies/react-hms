@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL, MEDICATION_OBJECT } from '../../Constant';
-import { setFormattedDate, getParameterByName } from '../../Helpers';
+import { setFormattedDate, getParameterByName, getFormattedDate } from '../../Helpers';
 
 
 function Medication(props) {
@@ -82,6 +82,7 @@ function Medication(props) {
             if (dateChange) {
                 for (var i = 0; i < resp.result.length; i++) {
                     resp.result[i]['date'] = dateChange
+                    resp.vkey = `${dateChange}-${resp.result[i].type}-${roster_id}`
                 }
             }
 
@@ -98,6 +99,8 @@ function Medication(props) {
 
                 m[i]['created_by'] = staff_id.toString()
                 m[i]['roster_id'] = roster_id.toString()
+                m[i]['vkey'] = `${getFormattedDate(new Date())}-${m[i].type}-${roster_id}`
+                
             }
             setMedication(m)
         }
@@ -180,6 +183,7 @@ function Medication(props) {
                                                                                 <fieldset className="form-group">
                                                                                     <textarea disabled={m.is_taken === 0 ? true : false} className="form-control" value={m.details} onChange={e => handleChange('details', index, e.target.value)} />
                                                                                 </fieldset>
+                                                                                {m.is_taken === 0 && <Link to={`/incident-report?id=${getParameterByName('id')}&type=${m.type}`}> Incident Form </Link>}
                                                                             </div>
                                                                         </div>
 

@@ -63,7 +63,7 @@ function ManagerRequest(props) {
             setRoster(r)
 
             const req = getParameterByName('req')
-            const URL = `${API_URL}/api/notification/staff_roster`
+            const URL = `${API_URL}/api/managers/create_request`
             let resp = await fetch(URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

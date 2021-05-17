@@ -20,6 +20,7 @@ import Medication from './Components/Staff/Medication';
 import ProgressReport from './Components/Staff/ProgressReport';
 import ClientFeedback from './Components/Client/ClientFeedback';
 import './App.css'
+import IncidentForm from "./Components/Staff/IncidentForm";
 
 function App() {
 
@@ -80,6 +81,9 @@ function App() {
             <Route exact path="/medication"> <Medication user={user} /> </Route>
 
             <Route exact path="/progress-report"> <ProgressReport user={user} /> </Route>
+
+            <Route exact path="/incident-report"> <IncidentForm user={user} /> </Route>
+
 
             <Route exact path="/client-feedback"> <ClientFeedback user={user} /> </Route>
 
