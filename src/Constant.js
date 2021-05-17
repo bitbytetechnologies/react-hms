@@ -83,7 +83,6 @@ export const MEDICATION_OBJECT = [
         "is_taken": 0,
         "details": "",
         "created_by": 0, //Staff ID
-        "incident_form_id": 0,
         "vkey": ''
     },
     {
@@ -93,7 +92,6 @@ export const MEDICATION_OBJECT = [
         "is_taken": 0,
         "details": "",
         "created_by": 0, //Staff ID
-        "incident_form_id": 0,
         "vkey": ''
     },
     {
@@ -103,7 +101,6 @@ export const MEDICATION_OBJECT = [
         "is_taken": 0,
         "details": "",
         "created_by": 0, //Staff ID
-        "incident_form_id": 0,
         "vkey": ''
     },
     {
@@ -113,7 +110,6 @@ export const MEDICATION_OBJECT = [
         "is_taken": 0,
         "details": "",
         "created_by": 0, //Staff ID
-        "incident_form_id": 0,
         "vkey": ''
     },
 ]
@@ -144,7 +140,7 @@ export const INCIDENT_OBJECT = {
     "support_worder": "Supported Worker edit",
     "report_completed_by": "Report completed By Tariq",
     "medications": "Peracitamol",
-    "medication_due_time": "8:00am breakfast medications",
+    "medication_due_time": time,
     "dose_should_given": "Dose Should Given Webster pack",
     "dose_given": "Dose Given Webster pack",
     "describe_medication_incident": "I mistakenly open Monday morning medications instead of Wednesday morning medications, but it was the same dose.",

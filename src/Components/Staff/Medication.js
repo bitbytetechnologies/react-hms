@@ -100,7 +100,7 @@ function Medication(props) {
                 m[i]['created_by'] = staff_id.toString()
                 m[i]['roster_id'] = roster_id.toString()
                 m[i]['vkey'] = `${getFormattedDate(new Date())}-${m[i].type}-${roster_id}`
-                
+
             }
             setMedication(m)
         }
@@ -183,7 +183,7 @@ function Medication(props) {
                                                                                 <fieldset className="form-group">
                                                                                     <textarea disabled={m.is_taken === 0 ? true : false} className="form-control" value={m.details} onChange={e => handleChange('details', index, e.target.value)} />
                                                                                 </fieldset>
-                                                                                {m.is_taken === 0 && <Link to={`/incident-report?id=${getParameterByName('id')}&type=${m.type}`}> Incident Form </Link>}
+                                                                                {m.is_taken === 0 && <Link to={`/incident-report?id=${getParameterByName('id')}&type=${m.type}${m.form_id ? ('&fid=' + m.form_id) : ''}`}> Incident Form </Link>}
                                                                             </div>
                                                                         </div>
 

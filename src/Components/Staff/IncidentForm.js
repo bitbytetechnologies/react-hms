@@ -34,10 +34,10 @@ function IncidentForm(props) {
 
         try {
 
-            const req = getParameterByName('req')
+            const fid = getParameterByName('fid')
             const URL = `${API_URL}/api/medication/incident_from`
             let resp = await fetch(URL, {
-                method: 'POST',
+                method: fid ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...incident })
             })
@@ -53,22 +53,48 @@ function IncidentForm(props) {
     }
 
 
-    const initaialRoster = () => {
+    const initialForm = async () => {
 
         let staff_id = props.user.id
         let roster_id = getParameterByName('id')
 
-        let r = { ...incident }
-        r.filled_by_user = staff_id.toString()
-        r.roster_id = roster_id.toString()
-        r.vkey = `${r.date}-${getParameterByName('type')}-${r.roster_id}`
-        setIncident(r)
+        let fid = getParameterByName('fid')
+
+        if (fid) {
+
+            try {
+
+                const URL = `${API_URL}/api/medication/incident_from/${fid}`
+                let resp = await fetch(URL)
+                resp = await resp.json()
+
+                if (resp.code === 1) {
+                    setIncident({ ...resp.result })
+                }
+            } catch (e) {
+
+                console.error(e.message)
+            }
+
+
+
+        } else {
+
+            let r = { ...incident }
+            r.filled_by_user = staff_id.toString()
+            r.roster_id = roster_id.toString()
+            r.vkey = `${r.date}-${getParameterByName('type')}-${r.roster_id}`
+            setIncident(r)
+        }
+
+
+
 
     }
 
     useEffect(() => {
 
-        initaialRoster()
+        initialForm()
 
         return () => { };
     }, []);
