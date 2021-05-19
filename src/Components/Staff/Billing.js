@@ -82,7 +82,7 @@ function Billing(props) {
                                     <div className="card-content collapse show">
                                         <div className="card-body">
                                             <div className="col-sm-12 col-md-10 m-auto">
-                                                <table class="table table-sm">
+                                                <table className="table table-sm">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -97,7 +97,7 @@ function Billing(props) {
                                                             <Fragment>
                                                                 {report.map((r, index) => {
                                                                     return (
-                                                                        <tr>
+                                                                        <tr key={r.progress_id}>
                                                                             <td scope="row">{index + 1}</td>
                                                                             <td> {getFormattedDate(new Date(r.datetime))} </td>
                                                                             <td>{r.req_hours}</td>
