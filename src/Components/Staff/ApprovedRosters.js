@@ -140,9 +140,10 @@ function ApprovedRosters(props) {
                                                                 <td className="align-middle" style={{ justifyContent: 'center', verticalAlign: 'middle' }}>
                                                                     <div className="row">
                                                                         <Link to={`/staff-progress?id=${r.id}`}> <span style={{ fontSize: '1.2rem', width: '100px', marginRight: '5px' }} className="badge badge-primary"> Progress  </span></Link>
-                                                                        <Link to={`/medication?id=${r.id}`}> <span style={{ fontSize: '1.2rem', width: '100px' }} className="badge badge-info"> Medication  </span></Link>
+                                                                        <Link to={`/medication?id=${r.id}`}> <span style={{ fontSize: '1.2rem', width: '100px', marginRight: '5px' }} className="badge badge-info"> Medication  </span></Link>
+                                                                        <Link to={`/billing?id=${r.req_id}`}> <span style={{ fontSize: '1.2rem', width: '100px' }} className="badge badge-warning"> Billing  </span></Link>
                                                                     </div>
-                                                                    
+
 
                                                                 </td>
                                                             </tr>

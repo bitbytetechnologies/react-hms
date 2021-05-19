@@ -21,6 +21,7 @@ import ProgressReport from './Components/Staff/ProgressReport';
 import ClientFeedback from './Components/Client/ClientFeedback';
 import './App.css'
 import IncidentForm from "./Components/Staff/IncidentForm";
+import Billing from "./Components/Staff/Billing";
 
 function App() {
 
@@ -79,6 +80,8 @@ function App() {
             <Route exact path="/staff-progress"> <StaffProgress user={user} /> </Route>
 
             <Route exact path="/medication"> <Medication user={user} /> </Route>
+
+            <Route exact path="/billing"> <Billing user={user} /> </Route>
 
             <Route exact path="/progress-report"> <ProgressReport user={user} /> </Route>
 
