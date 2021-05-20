@@ -88,9 +88,9 @@ function UsersList() {
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">Role &nbsp;
+                                                    <th scope="col"><i className="ft-filter"></i> &nbsp;
                                                         <select onChange={(e) => { filterList(e.target.value) }}>
-                                                            <option value="all">All</option>
+                                                            <option value="all">All Roles</option>
                                                             <option value="Manager">Management</option>
                                                             <option value="Staff">Staff</option>
                                                             <option value="Client">Client</option>
