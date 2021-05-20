@@ -35,3 +35,14 @@ export function getParameterByName(name, url = window.location.href) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+export const diff_hours = (dt2, dt2_time, dt1, dt1_time) => {
+
+    dt2 = new Date(dt2 + 'T' + dt2_time)
+    dt1 = new Date(dt1 + 'T' + dt1_time)
+
+    var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= (60 * 60);
+    return diff.toFixed(2)//Math.abs(Math.round(diff));
+
+}

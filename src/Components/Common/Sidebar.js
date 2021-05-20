@@ -8,7 +8,7 @@ function Sidebar(props) {
                 <ul className="nav navbar-nav flex-row">
                     <li className="nav-item mr-auto">
                         <Link className="navbar-brand" to="/">
-                            <img className="brand-logo" alt="Chameleon admin logo" src="theme-assets/images/logo/logo.png" />
+                            <img className="brand-logo" alt="Chameleon admin logo" src="theme-assets/images/logo/logo.svg" />
                             <h4 className="brand-text" style={{fontSize: '1.2rem'}}>Southern Star Care</h4>
                         </Link>
                     </li>
@@ -44,7 +44,8 @@ function Sidebar(props) {
                         <li className={`nav-item ${window.location.pathname === '/client-feedback' ? 'active' : ''}`}><Link to="/client-feedback"><i className="ft-search"></i><span className="menu-title" data-i18n=""> Client Feedback </span></Link></li>
 
                     </Fragment>}
-
+                    
+                    <li className={`nav-item ${window.location.pathname === '/change-password' ? 'active' : ''}`}><Link to="/change-password"><i className="ft-edit"></i><span className="menu-title" data-i18n=""> Change Password </span></Link></li>
 
 
                 </ul>

@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL, STAFF_OBJECT, } from '../../Constant';
-import { getFormattedDate, getParameterByName } from '../../Helpers';
+import { getFormattedDate, getParameterByName, diff_hours } from '../../Helpers';
 
 
 function AssignStaff(props) {
@@ -37,13 +37,19 @@ function AssignStaff(props) {
     }
 
 
+
     const handleChange = (name, value) => {
 
         let r = { ...roster }
         r[name] = value
+
+
+        r.hours = diff_hours(r.to_date, r.to_time, r.from_date, r.from_time)
         setRoster(r)
 
         setalertMsg({ display: false, type: '', message: '' })
+
+
 
     }
 
@@ -171,7 +177,7 @@ function AssignStaff(props) {
                                                                     <Fragment>
                                                                         <h5 className="mt-2">Shift Hours</h5>
                                                                         <fieldset className="form-group">
-                                                                            <input type="text" className="form-control" value={roster.hours} onChange={e => handleChange('hours', e.target.value)} />
+                                                                            <input type="text" disabled className="form-control" value={roster.hours} onChange={e => handleChange('hours', e.target.value)} />
                                                                         </fieldset>
                                                                     </Fragment>
 

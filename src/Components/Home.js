@@ -10,17 +10,7 @@ function Home() {
                         <div className="card-content collapse show">
                             <div className="card-body mt-5 mb-5">
                                 <div className="col-8 m-auto">
-                                    <h1 style={{ fontSize: '4rem', borderBottomStyle: 'groove', borderBlockEndWidth: '1px', borderBottomColor: '#4693ab', color: '#e3a372' }}> Welcome</h1>
-
-                                    <p className="mt-5" style={{ fontSize: '1.5rem' }}>
-                                        We are delighted that you have selected our hotel. <br />
-                                        <br />
-                                        On behalf of the entire team, I extend you a very warm welcome and trust your stay with us will be both enjoyable and comfortable. <br />
-                                        <br />
-                                        The hotel offers a selection of business services and facilities which are detailed in the booklet, placed on the writing-table in your room. <br />
-                                        <br />
-                                        <b>Should you require any assistance or have any specific requirements, please do not hesitate to contact me on extension ( 9999 ).</b> <br />
-                                    </p>
+                                    <img src="/theme-assets/images/logo/logo.svg"/>
                                 </div>
                             </div>
                         </div>

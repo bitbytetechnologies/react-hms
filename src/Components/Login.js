@@ -59,7 +59,7 @@ function Login() {
                         <div className="col-xl-4 col-lg-4 col-md-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title text-center" style={{ fontSize: '3rem' }}> <img width="100" src="/theme-assets/images/logo/logo-2.png" /> Login</h4>
+                                    <h4 className="card-title text-center" style={{ fontSize: '5rem' }}> <img width="75%" src="/theme-assets/images/logo/logo-2.svg" /> </h4>
                                 </div>
                                 <div className="card-block">
                                     {alert.display && <div class={`col-11 m-auto alert alert-${alert.class} mb-2`} role="alert">

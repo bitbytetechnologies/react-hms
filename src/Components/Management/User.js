@@ -281,7 +281,7 @@ function User() {
 
                                                         <h5 className="mt-2">Level of Work</h5>
                                                         <fieldset className="form-group">
-                                                            <select className="form-control" id="basicSelect" onChange={(e) => handleChange('role_id', e.target.value)}>
+                                                            <select className="form-control" id="basicSelect" onChange={(e) => handleChange('level_of_work', e.target.value)}>
                                                                 <option value="level_1"> Level 1</option>
                                                                 <option value="level_2"> Level 2</option>
                                                                 <option value="level_2"> Level 3</option>
@@ -315,7 +315,7 @@ function User() {
 
                                                     {(user.role_id == "1" || user.role_id == "2") && <Fragment>
 
-                                                        <h5 className="mt-2">What client likes ?</h5>
+                                                        <h5 className="mt-2">What are special skill ?</h5>
                                                         <fieldset className="form-group">
                                                             <input type="text" className="form-control" value={user.what_like} onChange={e => handleChange('what_like', e.target.value)} />
                                                         </fieldset>

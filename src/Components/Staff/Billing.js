@@ -104,7 +104,6 @@ function Billing(props) {
                                                                             <td> {r.staff_name}</td>
                                                                             <td style={{textAlign:'right'}}> {r.bill_amount ? r.bill_amount : '0'} </td>
                                                                         </tr>
-
                                                                     )
                                                                 })}
                                                                 <tr style={{background: 'lightgrey', color:'black'}}>

@@ -22,6 +22,7 @@ import ClientFeedback from './Components/Client/ClientFeedback';
 import './App.css'
 import IncidentForm from "./Components/Staff/IncidentForm";
 import Billing from "./Components/Staff/Billing";
+import ChangePassword from "./Components/ChangePassword";
 
 function App() {
 
@@ -58,6 +59,8 @@ function App() {
             <Route exact path="/"> <Home user={user} /> </Route>
 
             <Route exact path="/user"> <User user={user} /> </Route>
+
+            <Route exact path="/change-password"> <ChangePassword user={user} /> </Route>
 
             <Route exact path="/update-user"> <User user={user} /> </Route>
 

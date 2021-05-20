@@ -75,8 +75,7 @@ function LocationRequest(props) {
     useEffect(() => {
 
 
-        return () => {
-        };
+        return () => { };
     }, []);
 
     return (
