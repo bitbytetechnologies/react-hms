@@ -5,7 +5,7 @@ import { API_URL } from '../../Constant';
 
 function UsersList() {
 
-
+    const [allUsers, setAllUsers] = useState([])
     const [users, setUsers] = useState([])
     const [wait, setWait] = useState(false)
 
@@ -20,12 +20,20 @@ function UsersList() {
             resp = await resp.json()
 
             setUsers(resp.result)
+            setAllUsers(resp.result)
 
         } catch (e) {
             console.error(e.message)
         }
 
         setWait(false)
+    }
+
+    const filterList = (value) => {
+
+
+        let u = value === "all" ? allUsers : allUsers.filter((usr) => usr.rolename === value)
+        setUsers([...u])
     }
 
     useEffect(() => {
@@ -80,7 +88,14 @@ function UsersList() {
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">Role</th>
+                                                    <th scope="col">Role &nbsp;
+                                                        <select onChange={(e) => { filterList(e.target.value) }}>
+                                                            <option value="all">All</option>
+                                                            <option value="Manager">Management</option>
+                                                            <option value="Staff">Staff</option>
+                                                            <option value="Client">Client</option>
+                                                        </select>
+                                                    </th>
                                                     <th scope="col">Username</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col"> Actions</th>
@@ -114,7 +129,7 @@ function UsersList() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
