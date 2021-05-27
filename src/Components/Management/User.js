@@ -31,6 +31,13 @@ function User() {
         let u = { ...user }
         u.dob = getFormattedDate(new Date(u.dob))
 
+        if (!id) {
+            if (!checkPassword(u.password)) {
+                alert('Please eneter password atleast minimum length of six having one number, one lowercase and one uppercase letter.')
+                return;
+            }
+        }
+
         try {
 
 
@@ -103,6 +110,13 @@ function User() {
         }
 
 
+    }
+
+    const checkPassword = (str) => {
+        // at least one number, one lowercase and one uppercase letter
+        // at least six characters
+        var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+        return re.test(str);
     }
 
     useEffect(() => {

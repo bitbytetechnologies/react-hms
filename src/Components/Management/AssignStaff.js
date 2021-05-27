@@ -2,13 +2,14 @@ import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL, STAFF_OBJECT, } from '../../Constant';
-import { getFormattedDate, getParameterByName, diff_hours } from '../../Helpers';
+import { setFormattedDate, getParameterByName, diff_hours, getFormattedDate } from '../../Helpers';
 
 
 function AssignStaff(props) {
 
 
-    const [roster, setRoster] = useState(STAFF_OBJECT)
+    const [roster, setRoster] = useState({ ...STAFF_OBJECT })
+    const [request, setRequest] = useState(null)
     const [alertMsg, setalertMsg] = useState({ display: false, type: '', message: '' })
 
     const [users, setUsers] = useState([])
@@ -53,6 +54,40 @@ function AssignStaff(props) {
 
     }
 
+
+    const getRequest = async () => {
+
+        const req = getParameterByName('req')
+
+
+        try {
+
+            const URL = `${API_URL}/api/client_request/${req}`
+            let resp = await fetch(URL)
+            resp = await resp.json()
+
+
+            if (resp.code === 1) {
+                let request = resp.result[0]
+                let r = { ...roster }
+                r.from_date = setFormattedDate(new Date(request.from_date))
+                r.from_time = request.from_time
+                r.to_date = setFormattedDate(new Date(request.to_date))
+                r.to_time = request.to_time
+                r.hours = request.req_hours
+
+                setRoster({ ...r })
+
+            }
+
+            console.log('Request', resp.result[0])
+
+        } catch (e) {
+            console.error(e.message)
+        }
+
+    }
+
     const submitRoster = async () => {
 
         if (roster.staff_id == 0) {
@@ -88,7 +123,7 @@ function AssignStaff(props) {
     useEffect(() => {
 
         getUsersList()
-
+        getRequest()
         return () => {
         };
     }, []);

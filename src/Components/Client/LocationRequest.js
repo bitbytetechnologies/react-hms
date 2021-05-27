@@ -5,7 +5,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL, CLIENT_REQUEST_OBJECT, } from '../../Constant';
-import { getParameterByName } from '../../Helpers';
+import { getParameterByName, diff_hours } from '../../Helpers';
 
 
 function LocationRequest(props) {
@@ -22,8 +22,8 @@ function LocationRequest(props) {
         let r = { ...request }
         r.loc_long = place.value.place_id
         r.loc_attu = place.value.reference
-        r.city = place.value.structured_formatting.main_text
-        r.country = place.value.structured_formatting.secondary_text
+        r.city = place.value.structured_formatting.main_text ? place.value.structured_formatting.main_text : ''
+        r.country = place.value.structured_formatting.secondary_text ? place.value.structured_formatting.secondary_text : ''
 
         console.log('Place', place)
         setRequest(r)
@@ -34,6 +34,10 @@ function LocationRequest(props) {
 
         let r = { ...request }
         r[name] = value
+
+
+        r.req_hours = diff_hours(r.to_date, r.to_time, r.from_date, r.from_time)
+
 
         setRequest(r)
         setalertMsg({ display: false, type: '', message: '' })
@@ -62,9 +66,7 @@ function LocationRequest(props) {
             })
 
             resp = await resp.json()
-
             setalertMsg({ display: true, class: resp.code === 1 ? 'success' : 'danger', type: resp.code === 1 ? "Success" : "Falied", message: resp.message })
-
 
         } catch (e) {
             console.error(e.message)
@@ -74,8 +76,8 @@ function LocationRequest(props) {
 
     useEffect(() => {
 
-
         return () => { };
+
     }, []);
 
     return (
@@ -146,11 +148,24 @@ function LocationRequest(props) {
                                                                     </fieldset>
                                                                 </div>
                                                                 <div className="col-12 col-md-5">
+                                                                    <h5 className="mt-2">From Time</h5>
+                                                                    <fieldset className="form-group">
+                                                                        <input type="time" className="form-control" value={request.from_time} onChange={e => handleChange('from_time', e.target.value)} />
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div className="col-12 col-md-5">
+                                                                    <h5 className="mt-2">To Time</h5>
+                                                                    <fieldset className="form-group">
+                                                                        <input type="time" className="form-control" value={request.to_time} onChange={e => handleChange('to_time', e.target.value)} />
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div className="col-12 col-md-5">
                                                                     <h5 className="mt-2">Shift Hours</h5>
                                                                     <fieldset className="form-group">
                                                                         <input type="text" className="form-control" value={request.req_hours} onChange={e => handleChange('req_hours', e.target.value)} />
                                                                     </fieldset>
                                                                 </div>
+
 
                                                             </div>
                                                             <div className="form-group col-md-6 m-auto">

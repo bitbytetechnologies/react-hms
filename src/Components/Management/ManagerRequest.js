@@ -1,8 +1,7 @@
-import userEvent from '@testing-library/user-event';
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL, MANAGER_REQUEST_OBJECT } from '../../Constant';
-import { getFormattedDate, getParameterByName, diff_hours } from '../../Helpers';
+import { getParameterByName, diff_hours } from '../../Helpers';
 
 
 function ManagerRequest(props) {

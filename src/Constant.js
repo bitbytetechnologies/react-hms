@@ -125,7 +125,9 @@ export const CLIENT_REQUEST_OBJECT = {
     "request_status": "SENT",
     "from_date": setFormattedDate(date),
     "to_date": setFormattedDate(date),
-    "req_hours": 10
+    "req_hours": 0,
+    'from_time': time,
+    'to_time': time
 }
 
 
